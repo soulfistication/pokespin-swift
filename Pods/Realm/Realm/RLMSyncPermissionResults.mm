@@ -16,216 +16,106 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-#import "RLMSyncPermissionResults.h"
+#import "RLMSyncPermissionResults_Private.hpp"
 
+#import "collection_notifications.hpp"
 #import "RLMCollection_Private.hpp"
 #import "RLMObjectSchema_Private.hpp"
 #import "RLMQueryUtil.hpp"
-#import "RLMResults_Private.hpp"
 #import "RLMSchema_Private.hpp"
-#import "RLMSyncPermission_Private.hpp"
-#import "RLMSyncUtil_Private.hpp"
+#import "RLMSyncPermissionValue_Private.hpp"
+#import "RLMSyncUser_Private.hpp"
 #import "RLMUtil.hpp"
 
 #import "object.hpp"
 
 using namespace realm;
 
-namespace {
-
-bool keypath_is_valid(NSString *keypath)
-{
-    static NSSet<NSString *> *valid = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        valid = [NSSet setWithArray:@[RLMSyncPermissionSortPropertyPath,
-                                      RLMSyncPermissionSortPropertyUserID,
-                                      RLMSyncPermissionSortPropertyUpdated]];
-    });
-    return [valid containsObject:keypath];
+@interface RLMSyncPermissionResults () {
+    Results _results;
 }
-
-}
-
-/// Sort by the Realm Object Server path to the Realm to which the permission applies.
-RLMSyncPermissionSortProperty const RLMSyncPermissionSortPropertyPath       = @"path";
-/// Sort by the identity of the user to whom the permission applies.
-RLMSyncPermissionSortProperty const RLMSyncPermissionSortPropertyUserID     = @"userId";
-/// Sort by the date the permissions were last updated.
-RLMSyncPermissionSortProperty const RLMSyncPermissionSortPropertyUpdated    = @"updatedAt";
-
-@interface RLMSyncPermissionResults ()
-@property (nonatomic, strong) RLMSchema *schema;
-@property (nonatomic, strong) RLMObjectSchema *objectSchema;
 @end
 
 @implementation RLMSyncPermissionResults
 
-#pragma mark - Public API
-
-- (RLMPropertyType)type {
-    return RLMPropertyTypeObject;
+- (NSInteger)count {
+    return _results.size();
 }
 
-- (NSString *)objectClassName {
-    return NSStringFromClass([RLMSyncPermission class]);
+- (RLMNotificationToken *)addNotificationBlock:(RLMPermissionStatusBlock)block {
+    auto token = _results.async(RLMWrapPermissionStatusCallback(block));
+    return [[RLMCancellationToken alloc] initWithToken:std::move(token) realm:nil];
 }
 
-- (RLMRealm *)realm {
-    return nil;
-}
-
-- (RLMSyncPermission *)objectAtIndex:(NSUInteger)index {
-    return translateRLMResultsErrors([&] {
+- (RLMSyncPermissionValue *)objectAtIndex:(NSInteger)index {
+    try {
         Object permission(_results.get_realm(), _results.get_object_schema(), _results.get(index));
-        return [[RLMSyncPermission alloc] initWithPermission:Permission(permission)];
-    });
+        return [[RLMSyncPermissionValue alloc] initWithPermission:Permission(permission)];
+    } catch (std::exception const& ex) {
+        @throw RLMException(ex);
+    }
 }
 
-- (RLMSyncPermission *)firstObject {
+- (instancetype)initWithResults:(Results)results {
+    if (self = [super init]) {
+        _results = std::move(results);
+    }
+    return self;
+}
+
+- (RLMSyncPermissionValue *)firstObject {
     return self.count == 0 ? nil : [self objectAtIndex:0];
 }
 
-- (RLMSyncPermission *)lastObject {
+- (RLMSyncPermissionValue *)lastObject {
     return self.count == 0 ? nil : [self objectAtIndex:(self.count - 1)];
 }
 
-- (NSUInteger)indexOfObject:(RLMSyncPermission *)object {
-    if (object.key) {
-        // Key-value permissions are only used for setting; they are never returned.
-        return NSNotFound;
+- (NSInteger)indexOfObject:(RLMSyncPermissionValue *)object {
+    for (int i=0; i<self.count; i++) {
+        if ([[self objectAtIndex:i] isEqual:object]) {
+            return i;
+        }
     }
-    // Canonicalize the path.
-    NSString *path = object.path;
-    if ([path rangeOfString:@"~"].location != NSNotFound) {
-        path = [path stringByReplacingOccurrencesOfString:@"~" withString:object.identity];
-    }
-    NSString *topPrivilege;
-    switch (object.accessLevel) {
-        case RLMSyncAccessLevelNone:
-            // Deleted permissions are removed from the permissions Realm by ROS.
-            return NSNotFound;
-        case RLMSyncAccessLevelRead:
-            topPrivilege = @"mayRead";
+    return NSNotFound;
+}
+
+- (RLMSyncPermissionResults *)objectsWithPredicate:(NSPredicate *)predicate {
+    const auto& realm = _results.get_realm();
+    auto query = RLMPredicateToQuery(predicate,
+                                     [RLMObjectSchema objectSchemaForObjectStoreSchema:_results.get_object_schema()],
+                                     [RLMSchema dynamicSchemaFromObjectStoreSchema:realm->schema()],
+                                     realm->read_group());
+    auto filtered_results = _results.filter(std::move(query));
+    return [[RLMSyncPermissionResults alloc] initWithResults:std::move(filtered_results)];
+}
+
+- (RLMSyncPermissionResults *)sortedResultsUsingProperty:(RLMSyncPermissionResultsSortProperty)property
+                                               ascending:(BOOL)ascending {
+    std::string property_name;
+    switch (property) {
+        case RLMSyncPermissionResultsSortPropertyPath:
+            property_name = "path";
             break;
-        case RLMSyncAccessLevelWrite:
-            topPrivilege = @"mayWrite";
+        case RLMSyncPermissionResultsSortPropertyUserID:
+            property_name = "userId";
             break;
-        case RLMSyncAccessLevelAdmin:
-            topPrivilege = @"mayManage";
+        case RLMSyncPermissionResultsSortDateUpdated:
+            property_name = "updatedAt";
             break;
     }
-    // Build the predicate.
-    NSPredicate *p = [NSPredicate predicateWithFormat:@"%K = %@ AND %K = %@ AND %K == YES",
-                      RLMSyncPermissionSortPropertyPath, path,
-                      RLMSyncPermissionSortPropertyUserID, object.identity,
-                      topPrivilege];
-    return [self indexOfObjectWithPredicate:p];
-}
-
-- (NSUInteger)indexOfObjectWithPredicate:(NSPredicate *)predicate {
-    return translateRLMResultsErrors([&] {
-        auto& group = _results.get_realm()->read_group();
-        auto query = RLMPredicateToQuery(predicate, self.objectSchema, self.schema, group);
-        return RLMConvertNotFound(_results.index_of(std::move(query)));
+    const auto& table = _results.get_tableview().get_parent();
+    size_t col_idx = table.get_descriptor()->get_column_index(property_name);
+    REALM_ASSERT(col_idx != size_t(-1));
+    auto sorted_results = _results.sort({
+        table, {{ col_idx }}, { static_cast<bool>(ascending) }
     });
-}
-
-- (RLMResults<RLMSyncPermission *> *)objectsWithPredicate:(NSPredicate *)predicate {
-    return translateRLMResultsErrors([&] {
-        auto query = RLMPredicateToQuery(predicate, self.objectSchema, self.schema, _results.get_realm()->read_group());
-        return [[RLMSyncPermissionResults alloc] initWithResults:_results.filter(std::move(query))];
-    });
-}
-
-- (RLMResults<RLMSyncPermission *> *)sortedResultsUsingDescriptors:(NSArray<RLMSortDescriptor *> *)properties {
-    if (properties.count == 0) {
-        return self;
-    }
-    for (RLMSortDescriptor *descriptor in properties) {
-        if (!keypath_is_valid(descriptor.keyPath)) {
-            @throw RLMException(@"Invalid keypath specified. Use one of the constants defined in "
-                                @" `RLMSyncPermissionSortProperty`.");
-        }
-    }
-    return translateRLMResultsErrors([&] {
-        auto sorted = _results.sort(RLMSortDescriptorsToKeypathArray(properties));
-        return [[RLMSyncPermissionResults alloc] initWithResults:std::move(sorted)];
-    });
-}
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmismatched-parameter-types"
-- (RLMNotificationToken *)addNotificationBlock:(void(^)(RLMSyncPermissionResults *results,
-                                                        RLMCollectionChange *change,
-                                                        NSError *error))block {
-    auto cb = [=](const realm::CollectionChangeSet& changes, std::exception_ptr ptr) {
-        if (ptr) {
-            NSError *error = translateSyncExceptionPtrToError(std::move(ptr), RLMPermissionActionTypeGet);
-            REALM_ASSERT(error);
-            block(nil, nil, error);
-        } else {
-            // Finished successfully
-            block(self, [[RLMCollectionChange alloc] initWithChanges:changes], nil);
-        }
-    };
-    return [[RLMCancellationToken alloc] initWithToken:_results.add_notification_callback(std::move(cb)) realm:nil];
-}
-#pragma clang diagnostic pop
-
-- (id)aggregate:(__unused NSString *)property
-         method:(__unused util::Optional<Mixed> (Results::*)(size_t))method
-     methodName:(__unused NSString *)methodName returnNilForEmpty:(__unused BOOL)returnNilForEmpty {
-    // We don't support any of the min/max/average/sum APIs; they don't make sense for this collection type.
-    return nil;
-}
-
-- (id)valueForKey:(NSString *)key {
-    size_t count = self.count;
-    if (count == 0) {
-        return @[];
-    }
-    NSMutableArray *results = [NSMutableArray arrayWithCapacity:count];
-    if ([key isEqualToString:@"self"]) {
-        for (size_t i = 0; i < count; i++) {
-            [results addObject:[self objectAtIndex:i]];
-        }
-    } else {
-        for (size_t i = 0; i < count; i++) {
-            [results addObject:[[self objectAtIndex:i] valueForKey:key] ?: NSNull.null];
-        }
-    }
-    return results;
-}
-
-- (void)setValue:(__unused id)value forKey:(__unused NSString *)key {
-    @throw RLMException(@"Cannot set values for the read-only type `RLMSyncPermission`.");
-}
-
-#pragma mark - System
-
-- (RLMSchema *)schema {
-    if (!_schema) {
-        _schema = [RLMSchema dynamicSchemaFromObjectStoreSchema:_results.get_realm()->schema()];
-    }
-    return _schema;
-}
-
-- (RLMObjectSchema *)objectSchema {
-    if (!_objectSchema) {
-        _objectSchema = [RLMObjectSchema objectSchemaForObjectStoreSchema:_results.get_object_schema()];
-    }
-    return _objectSchema;
-}
-
-- (NSString *)description {
-    return RLMDescriptionWithMaxDepth(@"RLMSyncPermissionResults", self, 1);
+    return [[RLMSyncPermissionResults alloc] initWithResults:std::move(sorted_results)];
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
                                   objects:(id __unsafe_unretained [])buffer
                                     count:(NSUInteger)len {
-    // FIXME: It would be nice to have a shared fast enumeration implementation for `realm::Results`-only RLMResults.
     NSUInteger thisSize = self.count;
     if (state->state == 0) {
         state->extra[0] = 0;
@@ -252,11 +142,22 @@ RLMSyncPermissionSortProperty const RLMSyncPermissionSortPropertyUpdated    = @"
             return objectsInBuffer;
         }
         // Otherwise, add an object and advance the index pointer.
-        RLMSyncPermission * __autoreleasing thisPermission = [self objectAtIndex:idx];
+        RLMSyncPermissionValue * __autoreleasing thisPermission = [self objectAtIndex:idx];
         buffer[objectsInBuffer] = thisPermission;
         idx++;
         objectsInBuffer++;
     }
+}
+
+- (NSString *)objectClassName {
+    return @"RLMSyncPermission";
+}
+
+- (NSString *)description {
+    // FIXME: rather than force-casting to a protocol we don't formally implement,
+    // we should change RLMDescriptionWithMaxDepth to take a less restrictive
+    // collection type.
+    return RLMDescriptionWithMaxDepth(@"RLMSyncPermissionResults", (id<RLMCollection>)self, 1);
 }
 
 @end

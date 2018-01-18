@@ -218,14 +218,16 @@ inline Table* LangBindHelper::copy_table(const Table& table)
 
 inline Table* LangBindHelper::get_subtable_ptr(Table* t, size_t column_ndx, size_t row_ndx)
 {
-    TableRef subtab = t->get_subtable_tableref(column_ndx, row_ndx); // Throws
-    return subtab.release();
+    Table* subtab = t->get_subtable_ptr(column_ndx, row_ndx); // Throws
+    subtab->bind_ptr();
+    return subtab;
 }
 
 inline const Table* LangBindHelper::get_subtable_ptr(const Table* t, size_t column_ndx, size_t row_ndx)
 {
-    ConstTableRef subtab = t->get_subtable_tableref(column_ndx, row_ndx); // Throws
-    return subtab.release();
+    const Table* subtab = t->get_subtable_ptr(column_ndx, row_ndx); // Throws
+    subtab->bind_ptr();
+    return subtab;
 }
 
 inline Table* LangBindHelper::get_subtable_ptr(TableView* tv, size_t column_ndx, size_t row_ndx)

@@ -80,7 +80,6 @@ public:
     void adj_acc_erase_row(size_t) noexcept override;
     void adj_acc_move_over(size_t, size_t) noexcept override;
     void adj_acc_swap_rows(size_t, size_t) noexcept override;
-    void adj_acc_move_row(size_t, size_t) noexcept override;
     void adj_acc_merge_rows(size_t, size_t) noexcept override;
     void refresh_accessor_tree(size_t, const Spec&) override;
 
@@ -142,9 +141,6 @@ private:
 
     template <bool fix_ndx_in_parent>
     void adj_move_over(size_t from_row_ndx, size_t to_row_ndx) noexcept;
-
-    template <bool fix_ndx_in_parent>
-    void adj_move(size_t from_ndx, size_t to_ndx) noexcept;
 
     template <bool fix_ndx_in_parent>
     void adj_swap(size_t row_ndx_1, size_t row_ndx_2) noexcept;

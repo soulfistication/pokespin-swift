@@ -6,9 +6,11 @@
 //  Copyright © 2018 Ivan. All rights reserved.
 //
 
+import UIKit
+
 class SuccessViewController: BaseViewController {
 
-    var pokemonNumber = 0
+    var pokemonNumber = 2
 
     var unlocked = false
 

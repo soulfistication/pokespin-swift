@@ -86,11 +86,6 @@ struct Contains : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "CONTAINS";
-    }
-
     static const int condition = -1;
 };
 
@@ -130,11 +125,6 @@ struct Like : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "LIKE";
-    }
-
     static const int condition = -1;
 };
 
@@ -164,11 +154,6 @@ struct BeginsWith : public HackClass {
     {
         REALM_ASSERT(false);
         return false;
-    }
-
-    static std::string description()
-    {
-        return "BEGINSWITH";
     }
 
     static const int condition = -1;
@@ -202,11 +187,6 @@ struct EndsWith : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "ENDSWITH";
-    }
-
     static const int condition = -1;
 };
 
@@ -236,11 +216,6 @@ struct Equal {
     bool will_match(int64_t v, int64_t lbound, int64_t ubound)
     {
         return (v == 0 && ubound == 0 && lbound == 0);
-    }
-
-    static std::string description()
-    {
-        return "==";
     }
 };
 
@@ -279,11 +254,6 @@ struct NotEqual {
     {
         REALM_ASSERT(false);
         return false;
-    }
-
-    static std::string description()
-    {
-        return "!=";
     }
 };
 
@@ -346,11 +316,6 @@ struct ContainsIns : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "CONTAINS[c]";
-    }
-
     static const int condition = -1;
 };
 
@@ -396,11 +361,6 @@ struct LikeIns : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "LIKE[c]";
-    }
-
     static const int condition = -1;
 };
 
@@ -443,11 +403,6 @@ struct BeginsWithIns : public HackClass {
     {
         REALM_ASSERT(false);
         return false;
-    }
-
-    static std::string description()
-    {
-        return "BEGINSWITH[c]";
     }
 
     static const int condition = -1;
@@ -495,11 +450,6 @@ struct EndsWithIns : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "ENDSWITH[c]";
-    }
-
     static const int condition = -1;
 };
 
@@ -544,11 +494,6 @@ struct EqualIns : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "==[c]";
-    }
-
     static const int condition = -1;
 };
 
@@ -587,11 +532,6 @@ struct NotEqualIns : public HackClass {
         return false;
     }
 
-    static std::string description()
-    {
-        return "!=[c]";
-    }
-
     static const int condition = -1;
 };
 
@@ -623,11 +563,6 @@ struct Greater {
         static_cast<void>(ubound);
         return lbound > v;
     }
-
-    static std::string description()
-    {
-        return ">";
-    }
 };
 
 struct None {
@@ -657,11 +592,6 @@ struct None {
         static_cast<void>(v);
         return true;
     }
-
-    static std::string description()
-    {
-        return "none";
-    }
 };
 
 struct NotNull {
@@ -690,10 +620,6 @@ struct NotNull {
         static_cast<void>(ubound);
         static_cast<void>(v);
         return true;
-    }
-    static std::string description()
-    {
-        return "!= NULL";
     }
 };
 
@@ -725,10 +651,6 @@ struct Less {
         static_cast<void>(lbound);
         return ubound < v;
     }
-    static std::string description()
-    {
-        return "<";
-    }
 };
 
 struct LessEqual : public HackClass {
@@ -746,10 +668,6 @@ struct LessEqual : public HackClass {
     {
         REALM_ASSERT(false);
         return false;
-    }
-    static std::string description()
-    {
-        return "<=";
     }
     static const int condition = -1;
 };
@@ -769,10 +687,6 @@ struct GreaterEqual : public HackClass {
     {
         REALM_ASSERT(false);
         return false;
-    }
-    static std::string description()
-    {
-        return ">=";
     }
     static const int condition = -1;
 };

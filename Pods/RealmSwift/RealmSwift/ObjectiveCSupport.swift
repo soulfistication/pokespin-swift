@@ -31,27 +31,27 @@ import Realm
 public final class ObjectiveCSupport {
 
     /// Convert a `Results` to a `RLMResults`.
-    public static func convert<T>(object: Results<T>) -> RLMResults<AnyObject> {
+    public static func convert<T>(object: Results<T>) -> RLMResults<RLMObject> {
         return object.rlmResults
     }
 
     /// Convert a `RLMResults` to a `Results`.
-    public static func convert(object: RLMResults<AnyObject>) -> Results<Object> {
+    public static func convert(object: RLMResults<RLMObject>) -> Results<Object> {
         return Results(object)
     }
 
     /// Convert a `List` to a `RLMArray`.
-    public static func convert<T>(object: List<T>) -> RLMArray<AnyObject> {
+    public static func convert<T>(object: List<T>) -> RLMArray<RLMObject> {
         return object._rlmArray
     }
 
     /// Convert a `RLMArray` to a `List`.
-    public static func convert(object: RLMArray<AnyObject>) -> List<Object> {
+    public static func convert(object: RLMArray<RLMObject>) -> List<Object> {
         return List(rlmArray: object)
     }
 
     /// Convert a `LinkingObjects` to a `RLMResults`.
-    public static func convert<T>(object: LinkingObjects<T>) -> RLMResults<AnyObject> {
+    public static func convert<T>(object: LinkingObjects<T>) -> RLMResults<RLMObject> {
         return object.rlmResults
     }
 
@@ -152,15 +152,5 @@ public final class ObjectiveCSupport {
         return { totalBytes, usedBytes in
             return object(Int(totalBytes), Int(usedBytes))
         }
-    }
-
-    /// Convert a `SyncConfiguration` to a `RLMSyncConfiguration`.
-    public static func convert(object: SyncConfiguration) -> RLMSyncConfiguration {
-        return object.asConfig()
-    }
-
-    /// Convert a `RLMSyncConfiguration` to a `SyncConfiguration`.
-    public static func convert(object: RLMSyncConfiguration) -> SyncConfiguration {
-        return SyncConfiguration(config: object)
     }
 }

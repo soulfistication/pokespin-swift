@@ -352,7 +352,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlocked Pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfv-EP-g94">
-                                <rect key="frame" x="112.5" y="32" width="150.5" height="21"/>
+                                <rect key="frame" x="112.5" y="32.5" width="150.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

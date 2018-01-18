@@ -22,13 +22,16 @@
 
 @implementation NSError (RLMSync)
 
-- (RLMSyncErrorActionToken *)rlmSync_errorActionToken {
-    if (self.domain != RLMSyncErrorDomain) {
-        return nil;
+- (void(^)(void))rlmSync_clientResetBlock {
+    if (self.domain == RLMSyncErrorDomain && self.code == RLMSyncErrorClientResetError) {
+        return self.userInfo[kRLMSyncInitiateClientResetBlockKey];
     }
-    if (self.code == RLMSyncErrorClientResetError
-        || self.code == RLMSyncErrorPermissionDeniedError) {
-        return (RLMSyncErrorActionToken *)self.userInfo[kRLMSyncErrorActionTokenKey];
+    return nil;
+}
+
+- (void(^)(void))rlmSync_deleteRealmBlock {
+    if (self.domain == RLMSyncErrorDomain && self.code == RLMSyncErrorPermissionDeniedError) {
+        return self.userInfo[kRLMSyncInitiateDeleteRealmBlockKey];
     }
     return nil;
 }

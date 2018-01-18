@@ -24,7 +24,6 @@
 #include <system_error>
 #include <algorithm>
 #include <cstdlib>
-#include <cctype>
 
 #include <realm/string_data.hpp>
 

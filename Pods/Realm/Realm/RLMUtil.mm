@@ -39,7 +39,8 @@
 #import "RLMVersion.h"
 #endif
 
-static inline bool numberIsInteger(__unsafe_unretained NSNumber *const obj) {
+static inline bool nsnumber_is_like_integer(__unsafe_unretained NSNumber *const obj)
+{
     char data_type = [obj objCType][0];
     return data_type == *@encode(bool) ||
            data_type == *@encode(char) ||
@@ -53,14 +54,15 @@ static inline bool numberIsInteger(__unsafe_unretained NSNumber *const obj) {
            data_type == *@encode(unsigned long long);
 }
 
-static inline bool numberIsBool(__unsafe_unretained NSNumber *const obj) {
+static inline bool nsnumber_is_like_bool(__unsafe_unretained NSNumber *const obj)
+{
     // @encode(BOOL) is 'B' on iOS 64 and 'c'
     // objcType is always 'c'. Therefore compare to "c".
     if ([obj objCType][0] == 'c') {
         return true;
     }
 
-    if (numberIsInteger(obj)) {
+    if (nsnumber_is_like_integer(obj)) {
         int value = [obj intValue];
         return value == 0 || value == 1;
     }
@@ -68,7 +70,8 @@ static inline bool numberIsBool(__unsafe_unretained NSNumber *const obj) {
     return false;
 }
 
-static inline bool numberIsFloat(__unsafe_unretained NSNumber *const obj) {
+static inline bool nsnumber_is_like_float(__unsafe_unretained NSNumber *const obj)
+{
     char data_type = [obj objCType][0];
     return data_type == *@encode(float) ||
            data_type == *@encode(short) ||
@@ -83,7 +86,8 @@ static inline bool numberIsFloat(__unsafe_unretained NSNumber *const obj) {
            (data_type == *@encode(double) && (ABS([obj doubleValue]) <= FLT_MAX || isnan([obj doubleValue])));
 }
 
-static inline bool numberIsDouble(__unsafe_unretained NSNumber *const obj) {
+static inline bool nsnumber_is_like_double(__unsafe_unretained NSNumber *const obj)
+{
     char data_type = [obj objCType][0];
     return data_type == *@encode(double) ||
            data_type == *@encode(float) ||
@@ -97,69 +101,39 @@ static inline bool numberIsDouble(__unsafe_unretained NSNumber *const obj) {
            data_type == *@encode(unsigned long long);
 }
 
-static inline RLMArray *asRLMArray(__unsafe_unretained id const value) {
-    return RLMDynamicCast<RLMArray>(value) ?: RLMDynamicCast<RLMListBase>(value)._rlmArray;
-}
-
-static inline bool checkArrayType(__unsafe_unretained RLMArray *const array,
-                                  RLMPropertyType type, bool optional,
-                                  __unsafe_unretained NSString *const objectClassName) {
-    return array.type == type && array.optional == optional
-        && (type != RLMPropertyTypeObject || [array.objectClassName isEqualToString:objectClassName]);
-}
-
-BOOL RLMValidateValue(__unsafe_unretained id const value,
-                      RLMPropertyType type, bool optional, bool array,
-                      __unsafe_unretained NSString *const objectClassName) {
-    if (optional && !RLMCoerceToNil(value)) {
+BOOL RLMIsObjectValidForProperty(__unsafe_unretained id const obj,
+                                 __unsafe_unretained RLMProperty *const property) {
+    if (property.optional && !RLMCoerceToNil(obj)) {
         return YES;
     }
-    if (array) {
-        if (auto rlmArray = asRLMArray(value)) {
-            return checkArrayType(rlmArray, type, optional, objectClassName);
-        }
-        if ([value conformsToProtocol:@protocol(NSFastEnumeration)]) {
-            // check each element for compliance
-            for (id el in (id<NSFastEnumeration>)value) {
-                if (!RLMValidateValue(el, type, optional, false, objectClassName)) {
-                    return NO;
-                }
-            }
-            return YES;
-        }
-        if (!value || value == NSNull.null) {
-            return YES;
-        }
-        return NO;
-    }
 
-    switch (type) {
+    switch (property.type) {
         case RLMPropertyTypeString:
-            return [value isKindOfClass:[NSString class]];
+            return [obj isKindOfClass:[NSString class]];
         case RLMPropertyTypeBool:
-            if ([value isKindOfClass:[NSNumber class]]) {
-                return numberIsBool(value);
+            if ([obj isKindOfClass:[NSNumber class]]) {
+                return nsnumber_is_like_bool(obj);
             }
             return NO;
         case RLMPropertyTypeDate:
-            return [value isKindOfClass:[NSDate class]];
+            return [obj isKindOfClass:[NSDate class]];
         case RLMPropertyTypeInt:
-            if (NSNumber *number = RLMDynamicCast<NSNumber>(value)) {
-                return numberIsInteger(number);
+            if (NSNumber *number = RLMDynamicCast<NSNumber>(obj)) {
+                return nsnumber_is_like_integer(number);
             }
             return NO;
         case RLMPropertyTypeFloat:
-            if (NSNumber *number = RLMDynamicCast<NSNumber>(value)) {
-                return numberIsFloat(number);
+            if (NSNumber *number = RLMDynamicCast<NSNumber>(obj)) {
+                return nsnumber_is_like_float(number);
             }
             return NO;
         case RLMPropertyTypeDouble:
-            if (NSNumber *number = RLMDynamicCast<NSNumber>(value)) {
-                return numberIsDouble(number);
+            if (NSNumber *number = RLMDynamicCast<NSNumber>(obj)) {
+                return nsnumber_is_like_double(number);
             }
             return NO;
         case RLMPropertyTypeData:
-            return [value isKindOfClass:[NSData class]];
+            return [obj isKindOfClass:[NSData class]];
         case RLMPropertyTypeAny:
             return NO;
         case RLMPropertyTypeLinkingObjects:
@@ -167,79 +141,63 @@ BOOL RLMValidateValue(__unsafe_unretained id const value,
         case RLMPropertyTypeObject: {
             // only NSNull, nil, or objects which derive from RLMObject and match the given
             // object class are valid
-            RLMObjectBase *objBase = RLMDynamicCast<RLMObjectBase>(value);
-            return objBase && [objBase->_objectSchema.className isEqualToString:objectClassName];
+            RLMObjectBase *objBase = RLMDynamicCast<RLMObjectBase>(obj);
+            return objBase && [objBase->_objectSchema.className isEqualToString:property.objectClassName];
+        }
+        case RLMPropertyTypeArray: {
+            if (RLMArray *array = RLMDynamicCast<RLMArray>(obj)) {
+                return [array.objectClassName isEqualToString:property.objectClassName];
+            }
+            if (RLMListBase *list = RLMDynamicCast<RLMListBase>(obj)) {
+                return [list._rlmArray.objectClassName isEqualToString:property.objectClassName];
+            }
+            if ([obj conformsToProtocol:@protocol(NSFastEnumeration)]) {
+                // check each element for compliance
+                for (id el in (id<NSFastEnumeration>)obj) {
+                    RLMObjectBase *obj = RLMDynamicCast<RLMObjectBase>(el);
+                    if (!obj || ![obj->_objectSchema.className isEqualToString:property.objectClassName]) {
+                        return NO;
+                    }
+                }
+                return YES;
+            }
+            if (!obj || obj == NSNull.null) {
+                return YES;
+            }
+            return NO;
         }
     }
     @throw RLMException(@"Invalid RLMPropertyType specified");
 }
 
-void RLMThrowTypeError(__unsafe_unretained id const obj,
-                       __unsafe_unretained RLMObjectSchema *const objectSchema,
-                       __unsafe_unretained RLMProperty *const prop) {
-    @throw RLMException(@"Invalid value '%@' of type '%@' for '%@%s'%s property '%@.%@'.",
-                        obj, [obj class],
-                        prop.objectClassName ?: RLMTypeToString(prop.type), prop.optional ? "?" : "",
-                        prop.array ? " array" : "", objectSchema.className, prop.name);
-}
-
 void RLMValidateValueForProperty(__unsafe_unretained id const obj,
-                                 __unsafe_unretained RLMObjectSchema *const objectSchema,
-                                 __unsafe_unretained RLMProperty *const prop,
-                                 bool validateObjects) {
-    // This duplicates a lot of the checks in RLMIsObjectValidForProperty()
-    // for the sake of more specific error messages
-    if (prop.array) {
-        // nil is considered equivalent to an empty array for historical reasons
-        // since we don't support null arrays (only arrays containing null),
-        // it's not worth the BC break to change this
-        if (!obj || obj == NSNull.null) {
-            return;
-        }
-        if (![obj conformsToProtocol:@protocol(NSFastEnumeration)]) {
-            @throw RLMException(@"Invalid value (%@) for '%@%s' array property '%@.%@': value is not enumerable.",
-                                obj, prop.objectClassName ?: RLMTypeToString(prop.type), prop.optional ? "?" : "",
-                                objectSchema.className, prop.name);
-        }
-        if (!validateObjects && prop.type == RLMPropertyTypeObject) {
-            return;
-        }
-
-        if (RLMArray *array = asRLMArray(obj)) {
-            if (!checkArrayType(array, prop.type, prop.optional, prop.objectClassName)) {
-                @throw RLMException(@"RLMArray<%@%s> does not match expected type '%@%s' for property '%@.%@'.",
-                                    array.objectClassName ?: RLMTypeToString(array.type), array.optional ? "?" : "",
-                                    prop.objectClassName ?: RLMTypeToString(prop.type), prop.optional ? "?" : "",
-                                    objectSchema.className, prop.name);
+                                 __unsafe_unretained RLMProperty *const prop) {
+    switch (prop.type) {
+        case RLMPropertyTypeString:
+        case RLMPropertyTypeBool:
+        case RLMPropertyTypeDate:
+        case RLMPropertyTypeInt:
+        case RLMPropertyTypeFloat:
+        case RLMPropertyTypeDouble:
+        case RLMPropertyTypeData:
+            if (!RLMIsObjectValidForProperty(obj, prop)) {
+                @throw RLMException(@"Invalid value '%@' for property '%@'", obj, prop.name);
             }
-            return;
-        }
-
-        for (id value in obj) {
-            if (!RLMValidateValue(value, prop.type, prop.optional, false, prop.objectClassName)) {
-                RLMThrowTypeError(value, objectSchema, prop);
+            break;
+        case RLMPropertyTypeObject:
+            break;
+        case RLMPropertyTypeArray: {
+            if (obj && obj != NSNull.null && ![obj conformsToProtocol:@protocol(NSFastEnumeration)]) {
+                @throw RLMException(@"Array property value (%@) is not enumerable.", obj);
             }
+            break;
         }
-        return;
+        case RLMPropertyTypeAny:
+        case RLMPropertyTypeLinkingObjects:
+            // It should not be possible to have either of these property types
+            // in the persisted properties array
+            REALM_UNREACHABLE();
     }
-
-    // For create() we want to skip the validation logic for objects because
-    // we allow much fuzzier matching (any KVC-compatible object with at least
-    // all the non-defaulted fields), and all the logic for that lives in the
-    // object store rather than here
-    if (prop.type == RLMPropertyTypeObject && !validateObjects) {
-        return;
-    }
-    if (RLMIsObjectValidForProperty(obj, prop)) {
-        return;
-    }
-
-    RLMThrowTypeError(obj, objectSchema, prop);
-}
-
-BOOL RLMIsObjectValidForProperty(__unsafe_unretained id const obj,
-                                 __unsafe_unretained RLMProperty *const property) {
-    return RLMValidateValue(obj, property.type, property.optional, property.array, property.objectClassName);
 }
 
 NSDictionary *RLMDefaultValuesForObjectSchema(__unsafe_unretained RLMObjectSchema *const objectSchema) {
@@ -322,6 +280,12 @@ NSError *RLMMakeError(std::system_error const& exception) {
                            userInfo:@{NSLocalizedDescriptionKey: @(exception.what()),
                                       @"Error Code": @(exception.code().value()),
                                       @"Category": category}];
+}
+
+NSError *RLMMakeError(NSException *exception) {
+    return [NSError errorWithDomain:RLMErrorDomain
+                               code:0
+                           userInfo:@{NSLocalizedDescriptionKey: exception.reason}];
 }
 
 void RLMSetErrorOrThrow(NSError *error, NSError **outError) {

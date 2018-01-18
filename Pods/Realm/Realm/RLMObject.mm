@@ -309,7 +309,7 @@ RLMNotificationToken *RLMObjectAddNotificationBlock(RLMObjectBase *obj, RLMObjec
     if (!obj->_realm) {
         @throw RLMException(@"Only objects which are managed by a Realm support change notifications");
     }
-    [obj->_realm verifyNotificationsAreSupported:true];
+    [obj->_realm verifyNotificationsAreSupported];
 
     struct {
         void (^block)(NSArray<NSString *> *, NSArray *, NSArray *, NSError *);
