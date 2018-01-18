@@ -264,7 +264,6 @@ public:
     {
     }
 
-    T* release() { return util::bind_ptr<T>::release(); }
 private:
     friend class SubtableColumnBase;
     friend class Table;

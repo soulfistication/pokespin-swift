@@ -82,21 +82,20 @@ struct CocoaSyncLoggerFactory : public realm::SyncLoggerFactory {
 
 @interface RLMSyncManager ()
 - (instancetype)initWithCustomRootDirectory:(nullable NSURL *)rootDirectory NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, nullable, strong) NSNumber *globalSSLValidationDisabled;
 @end
 
 @implementation RLMSyncManager
 
+@synthesize globalSSLValidationDisabled = _globalSSLValidationDisabled;
+
 static RLMSyncManager *s_sharedManager = nil;
+static dispatch_once_t s_onceToken;
 
 + (instancetype)sharedManager {
-    std::once_flag flag;
-    std::call_once(flag, [] {
-        try {
-            s_sharedManager = [[RLMSyncManager alloc] initWithCustomRootDirectory:nil];
-        }
-        catch (std::exception const& e) {
-            @throw RLMException(e);
-        }
+    dispatch_once(&s_onceToken, ^{
+        s_sharedManager = [[RLMSyncManager alloc] initWithCustomRootDirectory:nil];
     });
     return s_sharedManager;
 }
@@ -121,6 +120,26 @@ static RLMSyncManager *s_sharedManager = nil;
         _appID = [[NSBundle mainBundle] bundleIdentifier] ?: @"(none)";
     }
     return _appID;
+}
+
+- (NSNumber *)globalSSLValidationDisabled {
+    @synchronized (self) {
+        return _globalSSLValidationDisabled;
+    }
+}
+
+- (void)setGlobalSSLValidationDisabled:(NSNumber *)globalSSLValidationDisabled {
+    @synchronized (self) {
+        _globalSSLValidationDisabled = globalSSLValidationDisabled;
+    }
+}
+
+- (void)setDisableSSLValidation:(BOOL)disableSSLValidation {
+    self.globalSSLValidationDisabled = @(disableSSLValidation);
+}
+
+- (BOOL)disableSSLValidation {
+    return [self.globalSSLValidationDisabled boolValue];
 }
 
 #pragma mark - Passthrough properties
@@ -152,23 +171,29 @@ static RLMSyncManager *s_sharedManager = nil;
     NSError *error = nil;
     BOOL shouldMakeError = YES;
     NSDictionary *custom = nil;
-    // Note that certain types of errors are 'interactive'; users have several options
-    // as to how to proceed after the error is reported.
     switch (errorClass) {
         case RLMSyncSystemErrorKindClientReset: {
-            std::string path = [userInfo[@(realm::SyncError::c_original_file_path_key)] UTF8String];
-            custom = @{kRLMSyncPathOfRealmBackupCopyKey:
-                           userInfo[@(realm::SyncError::c_recovery_file_path_key)],
-                       kRLMSyncErrorActionTokenKey:
-                           [[RLMSyncErrorActionToken alloc] initWithOriginalPath:std::move(path)]
-                       };;
+            // Users can respond to "client reset" errors to a
+            // greater degree than possible for most other errors.
+            std::string original_path = [userInfo[@(realm::SyncError::c_original_file_path_key)] UTF8String];
+            custom = @{kRLMSyncPathOfRealmBackupCopyKey: userInfo[@(realm::SyncError::c_recovery_file_path_key)],
+                       kRLMSyncInitiateClientResetBlockKey: ^{
+                           SyncManager::shared().immediately_run_file_actions(original_path);
+                       }};
             break;
         }
         case RLMSyncSystemErrorKindPermissionDenied: {
-            std::string path = [userInfo[@(realm::SyncError::c_original_file_path_key)] UTF8String];
-            custom = @{kRLMSyncErrorActionTokenKey:
-                           [[RLMSyncErrorActionToken alloc] initWithOriginalPath:std::move(path)]
-                       };
+            __block BOOL calledAlready = NO;
+            custom = @{kRLMSyncInitiateDeleteRealmBlockKey: ^ {
+                NSString *originalPath = userInfo[@(realm::SyncError::c_original_file_path_key)];
+                if (calledAlready) {
+                    @throw RLMException(@"The handler block for the Realm at '%@' has already been called once.",
+                                        originalPath);
+                }
+                calledAlready = YES;
+                std::string original_path = [originalPath UTF8String];
+                SyncManager::shared().immediately_run_file_actions(original_path);
+            }};
             break;
         }
         case RLMSyncSystemErrorKindUser:

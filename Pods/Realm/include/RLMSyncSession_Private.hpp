@@ -42,10 +42,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface RLMSyncErrorActionToken ()
-
-- (instancetype)initWithOriginalPath:(std::string)originalPath;
-
-@end
-
 NS_ASSUME_NONNULL_END

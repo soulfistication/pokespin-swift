@@ -12,10 +12,10 @@ import RealmSwift
 class Pokemon: Object {
 
     @objc dynamic var id: Int = 0
-//    var name: String
-//    var weight: Int
-//    var height: Int
-//    var baseExperience: Int
+    @objc dynamic var name: String = ""
+    @objc dynamic var weight: Int = 0
+    @objc dynamic var height: Int = 0
+    @objc dynamic var baseExperience: Int = 0
 
     // MARK: - Initializers
 
@@ -37,5 +37,9 @@ class Pokemon: Object {
         }
 
     }
+
+    // MARK: - Object Mapper
+
+
 
 }

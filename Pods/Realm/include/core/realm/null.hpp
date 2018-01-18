@@ -160,13 +160,6 @@ struct null {
     }
 };
 
-template <class OS>
-OS& operator<<(OS& os, const null&)
-{
-    os << "(null)";
-    return os;
-}
-
 } // namespace realm
 
 #endif // REALM_NULL_HPP

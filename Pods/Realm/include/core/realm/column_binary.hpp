@@ -145,7 +145,7 @@ public:
     {
     }
 
-    BinaryIterator(const BinaryColumn* col, size_t ndx)
+    BinaryIterator(BinaryColumn* col, size_t ndx)
         : m_binary_col(col)
         , m_ndx(ndx)
     {
@@ -169,7 +169,7 @@ public:
 
 private:
     bool end_of_data = false;
-    const BinaryColumn* m_binary_col = nullptr;
+    BinaryColumn* m_binary_col = nullptr;
     size_t m_ndx = 0;
     size_t m_pos = 0;
     BinaryData m_binary;

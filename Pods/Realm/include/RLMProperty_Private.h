@@ -48,6 +48,8 @@ static inline NSString *RLMTypeToString(RLMPropertyType type) {
             return @"any";
         case RLMPropertyTypeObject:
             return @"object";
+        case RLMPropertyTypeArray:
+            return @"array";
         case RLMPropertyTypeLinkingObjects:
             return @"linking objects";
     }

@@ -92,17 +92,20 @@ public:
     /// contain a subtable.
     size_t get_subtable_size(size_t row_ndx) const noexcept;
 
-    TableRef get_subtable_accessor(size_t row_ndx) const noexcept override;
+    Table* get_subtable_accessor(size_t row_ndx) const noexcept override;
 
     void discard_subtable_accessor(size_t row_ndx) noexcept override;
 
     /// If the value at the specified index is a subtable, return a
-    /// TableRef to that accessor for that subtable. Otherwise return
+    /// pointer to that accessor for that subtable. Otherwise return
     /// null. The accessor will be created if it does not already
     /// exist.
-    TableRef get_subtable_tableref(size_t row_ndx);
+    ///
+    /// The returned table pointer must **always** end up being
+    /// wrapped in some instantiation of BasicTableRef<>.
+    Table* get_subtable_ptr(size_t row_ndx);
 
-    ConstTableRef get_subtable_tableref(size_t subtable_ndx) const;
+    const Table* get_subtable_ptr(size_t subtable_ndx) const;
 
     void set_int(size_t ndx, int64_t value);
     void set_bool(size_t ndx, bool value);
@@ -152,7 +155,6 @@ public:
     void adj_acc_erase_row(size_t) noexcept override;
     void adj_acc_move_over(size_t, size_t) noexcept override;
     void adj_acc_swap_rows(size_t, size_t) noexcept override;
-    void adj_acc_move_row(size_t, size_t) noexcept override;
     void adj_acc_clear_root_table() noexcept override;
     void mark(int) noexcept override;
     void refresh_accessor_tree(size_t, const Spec&) override;
@@ -247,7 +249,7 @@ public:
     RefsColumn(Allocator& alloc, ref_type ref, Table* table, size_t column_ndx);
     ~RefsColumn() noexcept override;
 
-    using SubtableColumnBase::get_subtable_tableref;
+    using SubtableColumnBase::get_subtable_ptr;
 
     void refresh_accessor_tree(size_t, const Spec&) override;
 

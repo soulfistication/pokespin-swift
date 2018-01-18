@@ -44,10 +44,6 @@ CollectionNotifier::get_modification_checker(TransactionChangeInfo const& info,
     if (!any_of(begin(m_related_tables), end(m_related_tables), table_modified)) {
         return [](size_t) { return false; };
     }
-    if (m_related_tables.size() == 1) {
-        auto& modifications = info.tables[m_related_tables[0].table_ndx].modifications;
-        return [&](size_t row) { return modifications.contains(row); };
-    }
 
     return DeepChangeChecker(info, root_table, m_related_tables);
 }
@@ -180,12 +176,22 @@ CollectionNotifier::~CollectionNotifier()
     unregister();
 }
 
-uint64_t CollectionNotifier::add_callback(CollectionChangeCallback callback)
+size_t CollectionNotifier::add_callback(CollectionChangeCallback callback)
 {
     m_realm->verify_thread();
 
+    auto next_token = [=] {
+        size_t token = 0;
+        for (auto& callback : m_callbacks) {
+            if (token <= callback.token) {
+                token = callback.token + 1;
+            }
+        }
+        return token;
+    };
+
     std::lock_guard<std::mutex> lock(m_callback_mutex);
-    auto token = m_next_token++;
+    auto token = next_token();
     m_callbacks.push_back({std::move(callback), {}, {}, token, false, false});
     if (m_callback_index == npos) { // Don't need to wake up if we're already sending notifications
         Realm::Internal::get_coordinator(*m_realm).wake_up_notifier_worker();
@@ -194,7 +200,7 @@ uint64_t CollectionNotifier::add_callback(CollectionChangeCallback callback)
     return token;
 }
 
-void CollectionNotifier::remove_callback(uint64_t token)
+void CollectionNotifier::remove_callback(size_t token)
 {
     // the callback needs to be destroyed after releasing the lock as destroying
     // it could cause user code to be called
@@ -207,11 +213,9 @@ void CollectionNotifier::remove_callback(uint64_t token)
         }
 
         size_t idx = distance(begin(m_callbacks), it);
-        if (m_callback_index != npos) {
-            if (m_callback_index >= idx)
-                --m_callback_index;
+        if (m_callback_index != npos && m_callback_index >= idx) {
+            --m_callback_index;
         }
-        --m_callback_count;
 
         old = std::move(*it);
         m_callbacks.erase(it);
@@ -220,7 +224,7 @@ void CollectionNotifier::remove_callback(uint64_t token)
     }
 }
 
-void CollectionNotifier::suppress_next_notification(uint64_t token)
+void CollectionNotifier::suppress_next_notification(size_t token)
 {
     {
         std::lock_guard<std::mutex> lock(m_realm_mutex);
@@ -236,7 +240,7 @@ void CollectionNotifier::suppress_next_notification(uint64_t token)
     }
 }
 
-std::vector<CollectionNotifier::Callback>::iterator CollectionNotifier::find_callback(uint64_t token)
+std::vector<CollectionNotifier::Callback>::iterator CollectionNotifier::find_callback(size_t token)
 {
     REALM_ASSERT(m_error || m_callbacks.size() > 0);
 
@@ -335,21 +339,18 @@ void CollectionNotifier::after_advance()
 
 void CollectionNotifier::deliver_error(std::exception_ptr error)
 {
-    // Don't complain about double-unregistering callbacks
-    m_error = true;
-
-    m_callback_count = m_callbacks.size();
-    for_each_callback([this, &error](auto& lock, auto& callback) {
+    for_each_callback([&](auto& lock, auto& callback) {
         // acquire a local reference to the callback so that removing the
         // callback from within it can't result in a dangling pointer
-        auto cb = std::move(callback.fn);
-        auto token = callback.token;
+        auto cb = callback.fn;
         lock.unlock();
         cb.error(error);
-
-        // We never want to call the callback again after this, so just remove it
-        this->remove_callback(token);
     });
+
+    // Remove all the callbacks as we never need to call anything ever again
+    // after delivering an error
+    m_callbacks.clear();
+    m_error = true;
 }
 
 bool CollectionNotifier::is_for_realm(Realm& realm) const noexcept
@@ -365,7 +366,6 @@ bool CollectionNotifier::package_for_delivery()
     std::lock_guard<std::mutex> l(m_callback_mutex);
     for (auto& callback : m_callbacks)
         callback.changes_to_deliver = std::move(callback.accumulated_changes).finalize();
-    m_callback_count = m_callbacks.size();
     return true;
 }
 
@@ -373,8 +373,7 @@ template<typename Fn>
 void CollectionNotifier::for_each_callback(Fn&& fn)
 {
     std::unique_lock<std::mutex> callback_lock(m_callback_mutex);
-    REALM_ASSERT_DEBUG(m_callback_count <= m_callbacks.size());
-    for (++m_callback_index; m_callback_index < m_callback_count; ++m_callback_index) {
+    for (++m_callback_index; m_callback_index < m_callbacks.size(); ++m_callback_index) {
         fn(callback_lock, m_callbacks[m_callback_index]);
         if (!callback_lock.owns_lock())
             callback_lock.lock();

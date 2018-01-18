@@ -75,14 +75,12 @@ NSString *RLMRealmPathForFile(NSString *fileName) {
 }
 
 + (RLMRealmConfiguration *)rawDefaultConfiguration {
-    RLMRealmConfiguration *configuration;
     @synchronized(c_defaultRealmFileName) {
         if (!s_defaultConfiguration) {
             s_defaultConfiguration = [[RLMRealmConfiguration alloc] init];
         }
-        configuration = s_defaultConfiguration;
     }
-    return configuration;
+    return s_defaultConfiguration;
 }
 
 + (void)resetRealmConfigurationState {

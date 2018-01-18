@@ -39,8 +39,10 @@ namespace _impl {
 using ReconnectMode = sync::Client::ReconnectMode;
 
 struct SyncClient {
-    SyncClient(std::unique_ptr<util::Logger> logger, ReconnectMode reconnect_mode, bool multiplex_sessions)
-        : m_client(make_client(*logger, reconnect_mode, multiplex_sessions)) // Throws
+    sync::Client client;
+
+    SyncClient(std::unique_ptr<util::Logger> logger, ReconnectMode reconnect_mode = ReconnectMode::normal)
+        : client(make_client(*logger, reconnect_mode)) // Throws
         , m_logger(std::move(logger))
         , m_thread([this] {
             if (g_binding_callback_thread_observer) {
@@ -49,14 +51,14 @@ struct SyncClient {
                     g_binding_callback_thread_observer->will_destroy_thread();
                 });
                 try {
-                    m_client.run(); // Throws
+                    client.run(); // Throws
                 }
                 catch (std::exception const& e) {
                     g_binding_callback_thread_observer->handle_error(e);
                 }
             }
             else {
-                m_client.run(); // Throws
+                client.run(); // Throws
             }
         }) // Throws
 #if NETWORK_REACHABILITY_AVAILABLE
@@ -74,21 +76,15 @@ struct SyncClient {
 #endif
 
     void cancel_reconnect_delay() {
-        m_client.cancel_reconnect_delay();
+        client.cancel_reconnect_delay();
     }
 
     void stop()
     {
-        m_client.stop();
+        client.stop();
         if (m_thread.joinable())
             m_thread.join();
     }
-
-    std::unique_ptr<sync::Session> make_session(std::string path, sync::Session::Config config)
-    {
-        return std::make_unique<sync::Session>(m_client, std::move(path), std::move(config));
-    }
-
 
     ~SyncClient()
     {
@@ -96,16 +92,14 @@ struct SyncClient {
     }
 
 private:
-    static sync::Client make_client(util::Logger& logger, ReconnectMode reconnect_mode, bool multiplex_sessions)
+    static sync::Client make_client(util::Logger& logger, ReconnectMode reconnect_mode)
     {
         sync::Client::Config config;
         config.logger = &logger;
         config.reconnect_mode = std::move(reconnect_mode);
-        config.one_connection_per_session = !multiplex_sessions;
         return sync::Client(std::move(config)); // Throws
     }
 
-    sync::Client m_client;
     const std::unique_ptr<util::Logger> m_logger;
     std::thread m_thread;
 #if NETWORK_REACHABILITY_AVAILABLE
