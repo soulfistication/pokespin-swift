@@ -8,6 +8,10 @@
 
 class SlotMachineViewController: BaseViewController {
 
+    var pokemonNumber: Int = 0
+
+    weak var delegate: ScreenDismissable?
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {

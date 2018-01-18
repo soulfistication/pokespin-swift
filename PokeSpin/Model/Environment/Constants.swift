@@ -11,7 +11,7 @@ import Foundation
 struct Constants {
     enum SegueIdentifier: String {
         case openSlotMachine = "ELSegueIdentifierOpenSlotMachine";
-        case openSuccessSlotMachine = "ELSegueIdentifierOpenSuccessSlotMachine";
+        case openSuccess = "ELSegueIdentifierOpenSuccessSlotMachine";
         case openPokemonUnlocked = "ELSegueIdentifierOpenPokemonUnlocked";
         case openPokeDex = "ELSegueIdentifierOpenPokeDex";
     }

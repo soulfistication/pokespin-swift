@@ -23,6 +23,8 @@
 		24C80AAD2010B04900E359DB /* Futura-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAB2010B04900E359DB /* Futura-Light.ttf */; };
 		24C80AB12010BAF700E359DB /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB02010BAF700E359DB /* AppColors.swift */; };
 		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
+		24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB42010C55E00E359DB /* ScreenDismissable.swift */; };
+		24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */; };
 		28170D65DEF9A26132CA65D3 /* Pods_PokeSpin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		24C80AAB2010B04900E359DB /* Futura-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Light.ttf"; sourceTree = "<group>"; };
 		24C80AB02010BAF700E359DB /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		24C80AB42010C55E00E359DB /* ScreenDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismissable.swift; sourceTree = "<group>"; };
+		24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokeSpin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A0DE62B3E35B3D0C5D4EB /* Pods-PokeSpin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSpin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSpin/Pods-PokeSpin.debug.xcconfig"; sourceTree = "<group>"; };
 		F06167A3AF5BD90503F32A0F /* Pods-PokeSpin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSpin.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSpin/Pods-PokeSpin.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		24C80A922010ACD800E359DB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 		24C80AAF2010BAC700E359DB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				24C80AB42010C55E00E359DB /* ScreenDismissable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -342,10 +348,12 @@
 				24C80A982010AD3400E359DB /* IntroViewController.swift in Sources */,
 				24C80AB12010BAF700E359DB /* AppColors.swift in Sources */,
 				24C80A802010A83000E359DB /* AppDelegate.swift in Sources */,
+				24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */,
 				24C80A962010AD2800E359DB /* BaseViewController.swift in Sources */,
 				24C80AA82010AFD700E359DB /* Pokemon.swift in Sources */,
 				24C80AA42010AEC000E359DB /* NetworkClient.swift in Sources */,
 				24C80A9E2010ADA100E359DB /* SuccessViewController.swift in Sources */,
+				24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */,
 				24C80A9C2010AD9800E359DB /* SlotMachineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
