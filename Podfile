@@ -2,6 +2,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'PokeSpin' do
+    pod 'Alamofire', '~> 4.5'
     pod 'ObjectMapper', '~> 2.2.9' #using Swift 3
     pod 'ObjectMapper_RealmSwift', '~> 0.1.0' #using Swift 3
     pod 'RealmSwift', '~> 2.3' #using Swift 4
