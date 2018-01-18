@@ -1,0 +1,6 @@
+framework module Pods_PokeSpin {
+  umbrella header "Pods-PokeSpin-umbrella.h"
+
+  export *
+  module * { export * }
+}
