@@ -21,6 +21,8 @@
 		24C80AA82010AFD700E359DB /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AA72010AFD700E359DB /* Pokemon.swift */; };
 		24C80AAC2010B04900E359DB /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAA2010B04900E359DB /* Futura.ttc */; };
 		24C80AAD2010B04900E359DB /* Futura-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAB2010B04900E359DB /* Futura-Light.ttf */; };
+		24C80AB12010BAF700E359DB /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB02010BAF700E359DB /* AppColors.swift */; };
+		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
 		28170D65DEF9A26132CA65D3 /* Pods_PokeSpin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		24C80AA72010AFD700E359DB /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		24C80AAA2010B04900E359DB /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
 		24C80AAB2010B04900E359DB /* Futura-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Light.ttf"; sourceTree = "<group>"; };
+		24C80AB02010BAF700E359DB /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokeSpin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A0DE62B3E35B3D0C5D4EB /* Pods-PokeSpin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSpin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSpin/Pods-PokeSpin.debug.xcconfig"; sourceTree = "<group>"; };
 		F06167A3AF5BD90503F32A0F /* Pods-PokeSpin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSpin.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSpin/Pods-PokeSpin.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		24C80A7E2010A83000E359DB /* PokeSpin */ = {
 			isa = PBXGroup;
 			children = (
+				24C80AAF2010BAC700E359DB /* Protocols */,
+				24C80AAE2010BAC100E359DB /* Extensions */,
 				24C80A942010AD0A00E359DB /* Resources */,
 				24C80A912010ACD000E359DB /* Model */,
 				24C80A922010ACD800E359DB /* View */,
@@ -158,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				24C80AA52010AEF900E359DB /* Environment.swift */,
+				24C80AB22010BCFB00E359DB /* Constants.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -169,6 +176,21 @@
 				24C80AAB2010B04900E359DB /* Futura-Light.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		24C80AAE2010BAC100E359DB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				24C80AB02010BAF700E359DB /* AppColors.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		24C80AAF2010BAC700E359DB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		E1A842029787D49A27DAF471 /* Frameworks */ = {
@@ -315,8 +337,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C80A9A2010AD8B00E359DB /* PokemonCollectionViewController.swift in Sources */,
+				24C80AB32010BCFB00E359DB /* Constants.swift in Sources */,
 				24C80AA62010AEF900E359DB /* Environment.swift in Sources */,
 				24C80A982010AD3400E359DB /* IntroViewController.swift in Sources */,
+				24C80AB12010BAF700E359DB /* AppColors.swift in Sources */,
 				24C80A802010A83000E359DB /* AppDelegate.swift in Sources */,
 				24C80A962010AD2800E359DB /* BaseViewController.swift in Sources */,
 				24C80AA82010AFD700E359DB /* Pokemon.swift in Sources */,
