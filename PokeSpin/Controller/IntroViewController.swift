@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class IntroViewController: BaseViewController {
 
@@ -45,7 +46,11 @@ class IntroViewController: BaseViewController {
     // MARK: - Helpers
 
     func resetProgress() {
+        let realm = try! Realm()
 
+        try? realm.write {
+            realm.deleteAll()
+        }
     }
 
 }
