@@ -195,14 +195,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Spin the wheel!"/>
                                 <connections>
-                                    <action selector="spinSlotMachine:" destination="pCI-Ns-uk5" eventType="touchUpInside" id="dwu-4g-api"/>
+                                    <action selector="spinSlotMachineWithSender:" destination="pCI-Ns-uk5" eventType="touchUpInside" id="Gdb-ca-OFg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4n-P9-ILa" userLabel="Close Button">
                                 <rect key="frame" x="10" y="30" width="23" height="25"/>
                                 <state key="normal" image="CloseButtonBlack"/>
                                 <connections>
-                                    <action selector="closeButtonTapped:" destination="pCI-Ns-uk5" eventType="touchUpInside" id="OTC-q8-cMU"/>
+                                    <action selector="closeButtonTappedWithSender:" destination="pCI-Ns-uk5" eventType="touchUpInside" id="cAy-yY-wQR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now playing to unlock Pokemon:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvT-Mv-7q6">
@@ -426,6 +426,6 @@
         <image name="WonPokemon" width="160" height="224"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Ri-tl-Qih"/>
+        <segue reference="7qu-Yo-Xrb"/>
     </inferredMetricsTieBreakers>
 </document>
