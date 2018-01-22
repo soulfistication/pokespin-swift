@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ScreenDismissable: NSObjectProtocol {
+@objc protocol ScreenDismissable: NSObjectProtocol {
     func screenDidDismissed()
 }
