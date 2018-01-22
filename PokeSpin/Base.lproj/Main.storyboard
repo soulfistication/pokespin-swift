@@ -126,7 +126,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqv-eg-aaH">
-                                                    <rect key="frame" x="7" y="22.5" width="86" height="50.5"/>
+                                                    <rect key="frame" x="7" y="23" width="86" height="50.5"/>
                                                     <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="46"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -206,13 +206,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now playing to unlock Pokemon:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvT-Mv-7q6">
-                                <rect key="frame" x="70" y="33" width="235.5" height="19"/>
+                                <rect key="frame" x="70.5" y="33" width="235.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAW-dR-8vm">
-                                <rect key="frame" x="160.5" y="72" width="54" height="32"/>
+                                <rect key="frame" x="161" y="72" width="54" height="32"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -294,7 +294,7 @@
                                 <rect key="frame" x="10" y="30" width="23" height="25"/>
                                 <state key="normal" image="CloseButtonBlack"/>
                                 <connections>
-                                    <action selector="closeButtonTapped:" destination="O2r-fT-UlL" eventType="touchUpInside" id="qrC-Fg-AXU"/>
+                                    <action selector="closeButtonTappedWithSender:" destination="O2r-fT-UlL" eventType="touchUpInside" id="GhT-mY-eAG"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0OD-Eq-kTb">
@@ -352,11 +352,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlocked Pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfv-EP-g94">
-                                <rect key="frame" x="112.5" y="32.5" width="150.5" height="21"/>
+                                <rect key="frame" x="112.5" y="32" width="150.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1cH-nN-vCT">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -373,6 +376,7 @@
                             <constraint firstItem="0OD-Eq-kTb" firstAttribute="leading" secondItem="m3o-M8-O1L" secondAttribute="leading" constant="20" id="PNz-KI-cDe"/>
                             <constraint firstItem="rVv-du-8ZR" firstAttribute="leading" secondItem="HAH-fO-uJU" secondAttribute="leading" id="RTO-sE-1ke"/>
                             <constraint firstItem="Aei-bt-qYW" firstAttribute="leading" secondItem="m3o-M8-O1L" secondAttribute="leading" constant="10" id="SWe-Cj-tmr"/>
+                            <constraint firstItem="1cH-nN-vCT" firstAttribute="centerY" secondItem="m3o-M8-O1L" secondAttribute="centerY" id="VZa-ie-AJM"/>
                             <constraint firstItem="gXd-GY-kt0" firstAttribute="leading" secondItem="rVv-du-8ZR" secondAttribute="trailing" constant="10" id="Vjm-Qv-7wY"/>
                             <constraint firstItem="lQH-DV-9Ip" firstAttribute="top" secondItem="BzO-Ji-Nov" secondAttribute="bottom" constant="8" id="Wme-hX-RwJ"/>
                             <constraint firstItem="w3M-JZ-die" firstAttribute="leading" secondItem="gXd-GY-kt0" secondAttribute="leading" id="djV-PZ-yDr"/>
@@ -383,11 +387,13 @@
                             <constraint firstItem="0OD-Eq-kTb" firstAttribute="top" secondItem="Aei-bt-qYW" secondAttribute="bottom" constant="30" id="tL9-Cy-zXK"/>
                             <constraint firstItem="rVv-du-8ZR" firstAttribute="leading" secondItem="0OD-Eq-kTb" secondAttribute="leading" constant="30" id="tgf-z6-j6R"/>
                             <constraint firstItem="0OD-Eq-kTb" firstAttribute="centerX" secondItem="m3o-M8-O1L" secondAttribute="centerX" id="tuf-z7-sdh"/>
+                            <constraint firstItem="1cH-nN-vCT" firstAttribute="centerX" secondItem="m3o-M8-O1L" secondAttribute="centerX" id="uXv-Ng-xGO"/>
                             <constraint firstItem="7u1-Yp-RXS" firstAttribute="leading" secondItem="lQH-DV-9Ip" secondAttribute="trailing" constant="10" id="zzB-aY-yT4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m3o-M8-O1L"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="1cH-nN-vCT" id="vKa-8J-dLJ"/>
                         <outlet property="pokemonBaseExperienceLabel" destination="7u1-Yp-RXS" id="kFa-Oe-lca"/>
                         <outlet property="pokemonHeightLabel" destination="79O-mY-XAe" id="Q5F-LT-BDz"/>
                         <outlet property="pokemonImageView" destination="0OD-Eq-kTb" id="iwN-FC-qOK"/>

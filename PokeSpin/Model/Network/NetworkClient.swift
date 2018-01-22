@@ -11,16 +11,17 @@ import Alamofire
 
 struct NetworkClient {
 
-    static func request() {
-        let pokemonNumber = 2
-
+    func requestJSONString(pokemon: Int, completion: @escaping (DataResponse<String>) -> Void) {
         Alamofire
-            .request(Constants.ApiURL.baseURL.rawValue + "/api/v2/pokemon/\(pokemonNumber)")
+            .request(Constants.ApiURL.baseURL.rawValue + "/api/v2/pokemon/\(pokemon)")
+            .responseString(completionHandler: completion)
+    }
+
+    func request(pokemon: Int, completion: @escaping (DataResponse<Any>) -> Void) {
+        Alamofire
+            .request(Constants.ApiURL.baseURL.rawValue + "/api/v2/pokemon/\(pokemon)")
             .responseJSON { (response) in
-
-                let value = response.result.value!
-                print("The value is: \(value)")
-
+                completion(response)
         }
     }
 

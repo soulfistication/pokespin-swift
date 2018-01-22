@@ -30,6 +30,8 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupUI()
     }
 
     // MARK: - Setup UI
@@ -75,6 +77,11 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
         let successHit = firstHit && secondHit
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+
+            // DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
+            //    self?.performSegue(withIdentifier: Constants.SegueIdentifier.openSuccess.rawValue, sender: nil)
+            // }) // To make it always win for testing / debuging purposes;
+
             if successHit {
                 self?.wonLabel.isHidden = false
                 self?.wonImageView.isHidden = false
@@ -86,7 +93,7 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
                 if firstHit || secondHit || thirdHit {
                     message = "You almost won! Please try again"
                 }
-                let alertController = UIAlertController(title: "Info", message: message, preferredStyle: .alert)
+                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: { [weak self] (action) in
                     self?.dismiss(animated: true, completion: nil)
                 })
@@ -132,10 +139,8 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     func screenDidDismissed() {
         dismiss(animated: true) { [weak self] in
-             if let weakSelf = self,
-                let delegate = self?.delegate
-            {
-                if delegate.responds(to: #selector(weakSelf.screenDidDismissed)) {
+            if let delegate = self?.delegate {
+                if delegate.responds(to: #selector(delegate.screenDidDismissed)) {
                     delegate.screenDidDismissed()
                 }
             }

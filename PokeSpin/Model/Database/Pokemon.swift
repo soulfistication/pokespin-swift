@@ -8,8 +8,10 @@
 
 import UIKit
 import RealmSwift
+import ObjectMapper
+import ObjectMapper_RealmSwift
 
-class Pokemon: Object {
+class Pokemon: Object, Mappable {
 
     @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""
@@ -19,6 +21,9 @@ class Pokemon: Object {
 
     // MARK: - Initializers
 
+    required convenience init?(map: Map) {
+        self.init()
+    }
 
     // MARK: - RLMObject
 
@@ -40,6 +45,12 @@ class Pokemon: Object {
 
     // MARK: - Object Mapper
 
-
+    func mapping(map: Map) {
+        id             <- map["id"]
+        name           <- map["name"]
+        weight         <- map["weight"]
+        height         <- map["height"]
+        baseExperience <- map["base_experience"]
+    }
 
 }
