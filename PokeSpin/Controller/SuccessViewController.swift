@@ -49,13 +49,19 @@ class SuccessViewController: BaseViewController {
 
             client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] (response) in
                 self?.activityIndicatorView.stopAnimating()
-                let swiftJSON = response.result.value!
-                let pokemon = Pokemon(JSONString: swiftJSON)!
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.add(pokemon)
-                }
-                self?.updateUI()
+                self?.activityIndicatorView.isHidden = true
+
+                let jsonString = response.result.value!
+                
+                if let jsonData = jsonString.data(using: .utf8) {
+                    if let pokemon = try? JSONDecoder().decode(Pokemon.self, from: jsonData) {
+                        let realm = try! Realm()
+                        try! realm.write {
+                            realm.add(pokemon)
+                        }
+                        self?.updateUI() 
+                    }
+                } 
             })
         }
     }

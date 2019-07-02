@@ -8,10 +8,8 @@
 
 import UIKit
 import RealmSwift
-import ObjectMapper
-import ObjectMapper_RealmSwift
 
-class Pokemon: Object, Mappable {
+class Pokemon: Object, Codable {
 
     @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""
@@ -21,9 +19,6 @@ class Pokemon: Object, Mappable {
 
     // MARK: - Initializers
 
-    required convenience init?(map: Map) {
-        self.init()
-    }
 
     // MARK: - RLMObject
 
@@ -32,25 +27,18 @@ class Pokemon: Object, Mappable {
     }
 
     static func pokemonIsUnlocked(number: Int) -> Bool {
-
         let realm = try! Realm()
-
-        if realm.object(ofType: Pokemon.self, forPrimaryKey: number) != nil {
-            return true
-        } else {
-            return false
-        }
-
+        return realm.object(ofType: Pokemon.self, forPrimaryKey: number) != nil ? true : false
     }
-
-    // MARK: - Object Mapper
-
-    func mapping(map: Map) {
-        id             <- map["id"]
-        name           <- map["name"]
-        weight         <- map["weight"]
-        height         <- map["height"]
-        baseExperience <- map["base_experience"]
+    
+    // MARK: - Codable
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case weight = "weight"
+        case height = "height"
+        case baseExperience = "base_experience"
     }
 
 }

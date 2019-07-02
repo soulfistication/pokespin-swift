@@ -77,29 +77,31 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
         let successHit = firstHit && secondHit
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+            
+            // To make it always win for testing / debuging purposes;
 
-            // DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
-            //    self?.performSegue(withIdentifier: Constants.SegueIdentifier.openSuccess.rawValue, sender: nil)
-            // }) // To make it always win for testing / debuging purposes;
+             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
+                self?.performSegue(withIdentifier: Constants.SegueIdentifier.openSuccess.rawValue, sender: nil)
+             })
 
-            if successHit {
-                self?.wonLabel.isHidden = false
-                self?.wonImageView.isHidden = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
-                    self?.performSegue(withIdentifier: Constants.SegueIdentifier.openSuccess.rawValue, sender: nil)
-                })
-            } else {
-                var message = "You lost! Please try again."
-                if firstHit || secondHit || thirdHit {
-                    message = "You almost won! Please try again"
-                }
-                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: { [weak self] (action) in
-                    self?.dismiss(animated: true, completion: nil)
-                })
-                alertController.addAction(action)
-                self?.show(alertController, sender: nil)
-            }
+//            if successHit {
+//                self?.wonLabel.isHidden = false
+//                self?.wonImageView.isHidden = false
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
+//                    self?.performSegue(withIdentifier: Constants.SegueIdentifier.openSuccess.rawValue, sender: nil)
+//                })
+//            } else {
+//                var message = "You lost! Please try again."
+//                if firstHit || secondHit || thirdHit {
+//                    message = "You almost won! Please try again"
+//                }
+//                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//                let action = UIAlertAction(title: "OK", style: .default, handler: { [weak self] (action) in
+//                    self?.dismiss(animated: true, completion: nil)
+//                })
+//                alertController.addAction(action)
+//                self?.show(alertController, sender: nil)
+//            }
         }
     }
 
