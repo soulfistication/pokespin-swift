@@ -52,15 +52,15 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     @IBAction func spinSlotMachine(sender: AnyObject) {
         spinSlotButton.isEnabled = false
-        // Modulo 12 because we have 4 symbols * 3 times to show one full screen of
+        // We have 4 symbols * 3 times to show one full screen of
         // Picker View content. In the end one screen was not enough to make the spin
         // effect look continuous so I multiplied 12 * 3 = 36 to get 3 screens worth
         // of spin and make it seem infinite.
         // The + 12 is because we don't want to fall back to the first screen. It looks
         // awkard from the top. You can remove it and experiment.
-        let firstComponentRandomNumber = Int(arc4random() % 12 + 12)
-        let secondComponentRandomNumber = Int(arc4random() % 12 + 12)
-        let thirdComponentRandomNumber = Int(arc4random() % 12 + 12)
+        let firstComponentRandomNumber = Int.random(in: 12...24)
+        let secondComponentRandomNumber = Int.random(in: 12...24)
+        let thirdComponentRandomNumber = Int.random(in: 12...24)
 
         slotMachinePickerView.selectRow(firstComponentRandomNumber, inComponent: 0, animated: true)
         slotMachinePickerView.selectRow(secondComponentRandomNumber, inComponent: 1, animated: true)
@@ -78,12 +78,6 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             
-            // To make it always win for testing / debuging purposes;
-
-//             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
-//                self?.performSegue(withIdentifier: Constants.SegueIdentifier.openSuccess.rawValue, sender: nil)
-//             })
-
             if successHit {
                 self?.wonLabel.isHidden = false
                 self?.wonImageView.isHidden = false
