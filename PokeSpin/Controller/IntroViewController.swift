@@ -23,7 +23,6 @@ class IntroViewController: BaseViewController {
 
     func setupUI() {
         infoTextView.backgroundColor = UIColor.creamyBlue
-
         view.backgroundColor = UIColor.creamyBlue
     }
 

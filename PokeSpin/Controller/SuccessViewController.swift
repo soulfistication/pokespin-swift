@@ -12,25 +12,17 @@ import RealmSwift
 class SuccessViewController: BaseViewController {
 
     var pokemonNumber = 0
-
     var unlocked = false
-
     var client: NetworkClient!
-
     weak var delegate: ScreenDismissable?
 
     // MARK: - IBOutlets
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-
     @IBOutlet weak var pokemonImageView: UIImageView!
-
     @IBOutlet weak var pokemonNameLabel: UILabel!
-
     @IBOutlet weak var pokemonWeightLabel: UILabel!
-
     @IBOutlet weak var pokemonHeightLabel: UILabel!
-
     @IBOutlet weak var pokemonBaseExperienceLabel: UILabel!
 
     // MARK: - UIViewController
@@ -39,7 +31,6 @@ class SuccessViewController: BaseViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.creamyBlue
-
         client = NetworkClient()
 
         if unlocked {
@@ -50,9 +41,7 @@ class SuccessViewController: BaseViewController {
             client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] (response) in
                 self?.activityIndicatorView.stopAnimating()
                 self?.activityIndicatorView.isHidden = true
-
                 let jsonString = response.result.value!
-                
                 if let jsonData = jsonString.data(using: .utf8) {
                     if let pokemon = try? JSONDecoder().decode(Pokemon.self, from: jsonData) {
                         let realm = try! Realm()

@@ -17,20 +17,15 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
     // MARK: - IBOutlets
 
     @IBOutlet weak var pokemonNumberLabel: UILabel!
-
     @IBOutlet weak var slotMachinePickerView: UIPickerView!
-
     @IBOutlet weak var wonLabel: UILabel!
-
     @IBOutlet weak var wonImageView: UIImageView!
-
     @IBOutlet weak var spinSlotButton: UIButton!
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
 
@@ -77,7 +72,6 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
         let successHit = firstHit && secondHit
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            
             if successHit {
                 self?.wonLabel.isHidden = false
                 self?.wonImageView.isHidden = false
@@ -96,7 +90,6 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
                 alertController.addAction(action)
                 self?.show(alertController, sender: nil)
             }
-            
         }
     }
 

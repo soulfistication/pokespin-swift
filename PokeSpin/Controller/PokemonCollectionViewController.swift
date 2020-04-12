@@ -16,7 +16,6 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
 
@@ -38,13 +37,10 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
         var image: String?
 
         // Remember Pokemon numbers start at 1 not zero.
-
         let pokemonNumber = indexPath.row + 1
-
         let pokemonNumberString = String(pokemonNumber)
 
         // If Pokemon is unlocked we show the image if not the number
-
         if Pokemon.pokemonIsUnlocked(number: pokemonNumber) {
             image = pokemonNumberString
             cell.prepareForDisplay(with: nil, image: image)

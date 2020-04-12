@@ -11,7 +11,6 @@ import UIKit
 class PokemonCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var cellLabel: UILabel!
-
     @IBOutlet var cellImageView: UIImageView!
 
     // MARK: - UICollectionViewCell
