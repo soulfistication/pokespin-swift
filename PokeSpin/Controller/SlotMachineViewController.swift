@@ -123,10 +123,8 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     func screenDidDismissed() {
         dismiss(animated: true) { [weak self] in
-            if let delegate = self?.delegate {
-                if delegate.responds(to: #selector(delegate.screenDidDismissed)) {
-                    delegate.screenDidDismissed()
-                }
+            if let delegate = self?.delegate, delegate.responds(to: #selector(delegate.screenDidDismissed)) {
+                delegate.screenDidDismissed()
             }
         }
     }
