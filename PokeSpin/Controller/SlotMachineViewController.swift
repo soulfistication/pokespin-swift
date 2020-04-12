@@ -47,12 +47,7 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     @IBAction func spinSlotMachine(sender: AnyObject) {
         spinSlotButton.isEnabled = false
-        // We have 4 symbols * 3 times to show one full screen of
-        // Picker View content. In the end one screen was not enough to make the spin
-        // effect look continuous so I multiplied 12 * 3 = 36 to get 3 screens worth
-        // of spin and make it seem infinite.
-        // The + 12 is because we don't want to fall back to the first screen. It looks
-        // awkard from the top. You can remove it and experiment.
+        
         let firstComponentRandomNumber = Int.random(in: 12...24)
         let secondComponentRandomNumber = Int.random(in: 12...24)
         let thirdComponentRandomNumber = Int.random(in: 12...24)
@@ -112,7 +107,6 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
     // MARK: - Helpers
 
     private func slotSymbol(row: Int) -> String {
-        // We have 4 different symbols hence modulo 4.
         if row % 4 == 0 {
             return "♠️"
         } else if row % 4 == 1 {
