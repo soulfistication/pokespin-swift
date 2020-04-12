@@ -11,7 +11,6 @@ import UIKit
 class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ScreenDismissable {
 
     var pokemonNumber: Int = 0
-
     weak var delegate: ScreenDismissable?
 
     // MARK: - IBOutlets
