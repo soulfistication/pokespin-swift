@@ -27,7 +27,7 @@ class Pokemon: Object, Codable {
     }
 
     static func pokemonIsUnlocked(number: Int) -> Bool {
-        let realm = try! Realm()
+        guard let realm = try? Realm() else { return false }
         return realm.object(ofType: Pokemon.self, forPrimaryKey: number) != nil ? true : false
     }
     
