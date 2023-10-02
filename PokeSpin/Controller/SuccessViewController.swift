@@ -12,7 +12,7 @@ class SuccessViewController: BaseViewController {
 
     var pokemonNumber = 0
     var unlocked = false
-    var client: NetworkClient!
+    var client = NetworkClient()
     weak var delegate: ScreenDismissable?
 
     // MARK: - IBOutlets
@@ -29,8 +29,7 @@ class SuccessViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.creamyBlue
-        client = NetworkClient()
+        setupUI()
 
         if unlocked {
             updateUI()
@@ -40,6 +39,9 @@ class SuccessViewController: BaseViewController {
     }
 
     // MARK: - Helpers
+    func setupUI() {
+        view.backgroundColor = UIColor.creamyBlue
+    }
 
     func updateUI() {
         pokemonImageView.image = UIImage(named: String(pokemonNumber))
