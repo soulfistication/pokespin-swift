@@ -63,7 +63,8 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
         let secondHit = secondSymbol == thirdSymbol
         let thirdHit = firstSymbol == thirdSymbol
 
-        let successHit = firstHit && secondHit
+        // let successHit = firstHit && secondHit
+        let successHit = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             if successHit {

@@ -43,10 +43,8 @@ class SuccessViewController: BaseViewController {
 
     func updateUI() {
         pokemonImageView.image = UIImage(named: String(pokemonNumber))
-
         //TODO: fetch pokemon from db
         let pokemon = Pokemon(id: 1, name: "Ditto", weight: 23, height: 45, baseExperience: 145)
-
         pokemonNameLabel.text = pokemon.name
         pokemonWeightLabel.text = String(pokemon.weight)
         pokemonHeightLabel.text = String(pokemon.height)
@@ -60,14 +58,18 @@ class SuccessViewController: BaseViewController {
             
             guard let strongSelf = self else { return }
             
-            strongSelf.activityIndicatorView.stopAnimating()
-            strongSelf.activityIndicatorView.isHidden = true
+            DispatchQueue.main.async {
+                strongSelf.activityIndicatorView.stopAnimating()
+                strongSelf.activityIndicatorView.isHidden = true
+            }
             
             switch result {
             case .success(let pokemonString):
                 print(pokemonString)
                 //TODO: Convert pokemonString to Pokemon and add it to db
-                strongSelf.updateUI()
+                DispatchQueue.main.async {
+                    strongSelf.updateUI()
+                }
             case .failure(let error):
                 print(String(describing: error))
             }
