@@ -7,22 +7,22 @@
 //
 
 import Foundation
-import Alamofire
 
 struct NetworkClient {
+    
+    let baseURL = Constants.ApiURL.baseURL.rawValue
+    let apiVersion = "api/v2"
+    let endpoint = "pokemon"
 
-    func requestJSONString(pokemon: Int, completion: @escaping (DataResponse<String>) -> Void) {
-        Alamofire
-            .request(Constants.ApiURL.baseURL.rawValue + "/api/v2/pokemon/\(pokemon)")
-            .responseString(completionHandler: completion)
+    func requestJSONString(pokemon: Int, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        
+        
+//        Alamofire
+//            .request(baseURL + "/api/v2/pokemon/\(pokemon)")
+//            .responseString(completionHandler: completion)
+        
     }
 
-    func request(pokemon: Int, completion: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire
-            .request(Constants.ApiURL.baseURL.rawValue + "/api/v2/pokemon/\(pokemon)")
-            .responseJSON { (response) in
-                completion(response)
-        }
-    }
 
 }

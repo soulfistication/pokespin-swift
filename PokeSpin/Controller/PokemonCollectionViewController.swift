@@ -28,7 +28,7 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
     // MARK: - UICollectionViewData Source
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18 // I decided to use 18 Pokemons
+        return 18 // I decided to use the first 18 Pokemons
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

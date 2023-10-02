@@ -2,12 +2,11 @@
 //  SuccessViewController.swift
 //  PokeSpin
 //
-//  Created by Ivan Almada on 18/01/2018.
+//  Created by Ivan Almada on 02/10/2023.
 //  Copyright © 2018 Ivan. All rights reserved.
 //
 
 import UIKit
-import RealmSwift
 
 class SuccessViewController: BaseViewController {
 
@@ -36,22 +35,7 @@ class SuccessViewController: BaseViewController {
         if unlocked {
             updateUI()
         } else {
-            activityIndicatorView.startAnimating()
-
-            client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] (response) in
-                self?.activityIndicatorView.stopAnimating()
-                self?.activityIndicatorView.isHidden = true
-                let jsonString = response.result.value!
-                if let jsonData = jsonString.data(using: .utf8) {
-                    if let pokemon = try? JSONDecoder().decode(Pokemon.self, from: jsonData) {
-                        let realm = try! Realm()
-                        try! realm.write {
-                            realm.add(pokemon)
-                        }
-                        self?.updateUI() 
-                    }
-                } 
-            })
+            fetchPokemon()
         }
     }
 
@@ -60,13 +44,29 @@ class SuccessViewController: BaseViewController {
     func updateUI() {
         pokemonImageView.image = UIImage(named: String(pokemonNumber))
 
-        let realm = try! Realm()
-        let pokemon = realm.object(ofType: Pokemon.self, forPrimaryKey: pokemonNumber)!
+        //TODO: fetch pokemon from db
+        let pokemon = Pokemon(id: 1, name: "Ditto", weight: 23, height: 45, baseExperience: 145)
 
         pokemonNameLabel.text = pokemon.name
         pokemonWeightLabel.text = String(pokemon.weight)
         pokemonHeightLabel.text = String(pokemon.height)
         pokemonBaseExperienceLabel.text = String(pokemon.baseExperience)
+    }
+    
+    func fetchPokemon() {
+        activityIndicatorView.startAnimating()
+
+        client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] (response) in
+            self?.activityIndicatorView.stopAnimating()
+            self?.activityIndicatorView.isHidden = true
+//            let jsonString = response.result.value!
+//            if let jsonData = jsonString.data(using: .utf8) {
+//                if let pokemon = try? JSONDecoder().decode(Pokemon.self, from: jsonData) {
+//                    //TODO: Add pokemon data to db
+//                    self?.updateUI()
+//                }
+//            }
+        })
     }
 
     // MARK: - IBAction
