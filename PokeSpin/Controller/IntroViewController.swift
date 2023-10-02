@@ -44,7 +44,7 @@ class IntroViewController: BaseViewController {
     // MARK: - Helpers
 
     func resetProgress() {
-
+        //TODO: Implement using Core Data
     }
 
 }
