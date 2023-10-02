@@ -19,7 +19,7 @@ struct Pokemon: Codable {
     // MARK: - RLMObject
 
     static func pokemonIsUnlocked(number: Int) -> Bool {
-        return true
+        return false
     }
     
     // MARK: - Codable

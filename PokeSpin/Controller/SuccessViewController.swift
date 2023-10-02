@@ -56,16 +56,22 @@ class SuccessViewController: BaseViewController {
     func fetchPokemon() {
         activityIndicatorView.startAnimating()
 
-        client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] (response) in
-            self?.activityIndicatorView.stopAnimating()
-            self?.activityIndicatorView.isHidden = true
-//            let jsonString = response.result.value!
-//            if let jsonData = jsonString.data(using: .utf8) {
-//                if let pokemon = try? JSONDecoder().decode(Pokemon.self, from: jsonData) {
-//                    //TODO: Add pokemon data to db
-//                    self?.updateUI()
-//                }
-//            }
+        client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.activityIndicatorView.stopAnimating()
+            strongSelf.activityIndicatorView.isHidden = true
+            
+            switch result {
+            case .success(let pokemonString):
+                print(pokemonString)
+                //TODO: Convert pokemonString to Pokemon and add it to db
+                strongSelf.updateUI()
+            case .failure(let error):
+                print(String(describing: error))
+            }
+            
         })
     }
 
