@@ -25,7 +25,6 @@
 		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
 		24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB42010C55E00E359DB /* ScreenDismissable.swift */; };
 		24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */; };
-		28170D65DEF9A26132CA65D3 /* Pods_PokeSpin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,9 +48,6 @@
 		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C80AB42010C55E00E359DB /* ScreenDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismissable.swift; sourceTree = "<group>"; };
 		24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewCell.swift; sourceTree = "<group>"; };
-		3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokeSpin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB5A0DE62B3E35B3D0C5D4EB /* Pods-PokeSpin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSpin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSpin/Pods-PokeSpin.debug.xcconfig"; sourceTree = "<group>"; };
-		F06167A3AF5BD90503F32A0F /* Pods-PokeSpin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSpin.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSpin/Pods-PokeSpin.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,29 +55,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28170D65DEF9A26132CA65D3 /* Pods_PokeSpin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		170DFE0A9A056A70BBDFDE47 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CB5A0DE62B3E35B3D0C5D4EB /* Pods-PokeSpin.debug.xcconfig */,
-				F06167A3AF5BD90503F32A0F /* Pods-PokeSpin.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		24C80A732010A83000E359DB = {
 			isa = PBXGroup;
 			children = (
 				24C80A7E2010A83000E359DB /* PokeSpin */,
 				24C80A7D2010A83000E359DB /* Products */,
-				170DFE0A9A056A70BBDFDE47 /* Pods */,
-				E1A842029787D49A27DAF471 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,14 +183,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		E1A842029787D49A27DAF471 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3EAB045587FF13C6D61CF35B /* Pods_PokeSpin.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,11 +190,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24C80A8E2010A83000E359DB /* Build configuration list for PBXNativeTarget "PokeSpin" */;
 			buildPhases = (
-				428118AF6CAC348B48B0AA3D /* [CP] Check Pods Manifest.lock */,
 				24C80A782010A83000E359DB /* Sources */,
 				24C80A792010A83000E359DB /* Frameworks */,
 				24C80A7A2010A83000E359DB /* Resources */,
-				AF5AD171EB5572BF4480D838 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,51 +251,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		428118AF6CAC348B48B0AA3D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PokeSpin-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF5AD171EB5572BF4480D838 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PokeSpin/Pods-PokeSpin-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PokeSpin/Pods-PokeSpin-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		24C80A782010A83000E359DB /* Sources */ = {
@@ -475,7 +404,6 @@
 		};
 		24C80A8F2010A83000E359DB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB5A0DE62B3E35B3D0C5D4EB /* Pods-PokeSpin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -490,7 +418,6 @@
 		};
 		24C80A902010A83000E359DB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F06167A3AF5BD90503F32A0F /* Pods-PokeSpin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
