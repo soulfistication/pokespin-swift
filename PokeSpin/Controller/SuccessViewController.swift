@@ -83,11 +83,7 @@ class SuccessViewController: BaseViewController {
 
     @IBAction func closeButtonTapped(sender: AnyObject) {
         dismiss(animated: true) { [weak self] in
-            if let delegate = self?.delegate {
-                if delegate.responds(to: #selector(delegate.screenDidDismissed)) {
-                    delegate.screenDidDismissed()
-                }
-            }
+            self?.delegate?.screenDidDismissed()
         }
     }
 
