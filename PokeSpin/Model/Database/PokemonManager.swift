@@ -8,10 +8,24 @@
 
 import Foundation
 
-struct PokemonManager {
+protocol IPokemonStorage {
+    static func addPokemon(pokemon: Pokemon)
+    static func fetchPokemon(number: Int) -> Pokemon?
+    static func deleteAllPokemon()
+}
+
+struct PokemonManager: IPokemonStorage {
     
     static func fetchPokemon(number: Int) -> Pokemon? {
         return nil
+    }
+    
+    static func addPokemon(pokemon: Pokemon) {
+        
+    }
+    
+    static func deleteAllPokemon() {
+        
     }
 
 }
