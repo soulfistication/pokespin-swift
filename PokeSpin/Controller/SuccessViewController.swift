@@ -87,10 +87,12 @@ class SuccessViewController: BaseViewController {
             switch result {
             case .success(let data):
                 let decoder = JSONDecoder()
-                let pokemon = try? decoder.decode(Pokemon.self, from: data)
-                strongSelf.pokemon = pokemon
-                DispatchQueue.main.async {
-                    strongSelf.updateUI()
+                if let pokemon = try? decoder.decode(Pokemon.self, from: data) {
+                    strongSelf.pokemon = pokemon
+                    PokemonManager.addPokemon(pokemon: pokemon)
+                    DispatchQueue.main.async {
+                        strongSelf.updateUI()
+                    }
                 }
             case .failure(let error):
                 print(String(describing: error))
