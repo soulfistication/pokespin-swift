@@ -135,7 +135,6 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
         if segue.identifier == Constants.SegueIdentifier.openSuccess.rawValue {
             let successViewController = segue.destination as! SuccessViewController
             successViewController.pokemonNumber = pokemonNumber
-            successViewController.unlocked = false
             successViewController.delegate = self
         }
     }

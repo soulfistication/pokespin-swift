@@ -91,7 +91,6 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
             slotMachineViewController.delegate = self
         } else if segue.identifier == Constants.SegueIdentifier.openPokemonUnlocked.rawValue {
             guard let successViewController = segue.destination as? SuccessViewController else { return }
-            successViewController.unlocked = true
             successViewController.pokemonNumber = pokemonNumber
             successViewController.delegate = self
         }

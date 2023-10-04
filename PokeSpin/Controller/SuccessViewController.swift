@@ -11,7 +11,6 @@ import UIKit
 class SuccessViewController: BaseViewController {
 
     var pokemonNumber = 0
-    var unlocked = false
     var client = NetworkClient()
     weak var delegate: ScreenDismissable?
     
@@ -32,8 +31,10 @@ class SuccessViewController: BaseViewController {
         super.viewDidLoad()
 
         setupUI()
+        
+        let isUnlocked = pokemon?.isUnlocked ?? false
 
-        if unlocked {
+        if isUnlocked {
             updateUI()
         } else {
             fetchPokemon()
