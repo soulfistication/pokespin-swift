@@ -14,6 +14,8 @@ class SuccessViewController: BaseViewController {
     var unlocked = false
     var client = NetworkClient()
     weak var delegate: ScreenDismissable?
+    
+    var pokemon: Pokemon?
 
     // MARK: - IBOutlets
 
@@ -44,20 +46,31 @@ class SuccessViewController: BaseViewController {
     }
 
     func updateUI() {
-        pokemonImageView.image = UIImage(named: String(pokemonNumber))
-        //TODO: fetch pokemon from db
-        let pokemon = Pokemon(id: 1, name: "Ditto", weight: 23, height: 45, baseExperience: 145)
-        pokemonNameLabel.text = pokemon.name
-        pokemonWeightLabel.text = String(pokemon.weight)
-        pokemonHeightLabel.text = String(pokemon.height)
-        pokemonBaseExperienceLabel.text = String(pokemon.baseExperience)
+        if let pokemon = self.pokemon {
+            pokemonNameLabel.text = pokemon.name
+            pokemonWeightLabel.text = String(pokemon.weight)
+            pokemonHeightLabel.text = String(pokemon.height)
+            pokemonBaseExperienceLabel.text = String(pokemon.baseExperience)
+            pokemonImageView.image = UIImage(named: String(pokemonNumber))
+        } else {
+            let dittoPokemonNumber = 1
+            let pokemonName = "Ditto"
+            let weight = 23
+            let height = 45
+            let experience = 145
+            let pokemon = Pokemon(id: dittoPokemonNumber, name: pokemonName, weight: weight, height: height, baseExperience: experience)
+            pokemonNameLabel.text = pokemonName
+            pokemonWeightLabel.text = String(weight)
+            pokemonHeightLabel.text = String(height)
+            pokemonBaseExperienceLabel.text = String(experience)
+            pokemonImageView.image = UIImage(named: String(dittoPokemonNumber))
+        }
     }
     
     func fetchPokemon() {
         activityIndicatorView.startAnimating()
-
-        client.requestJSONString(pokemon: pokemonNumber, completion: { [weak self] result in
-            
+        
+        client.requestJSONData(pokemon: pokemonNumber) { [weak self] result in
             guard let strongSelf = self else { return }
             
             DispatchQueue.main.async {
@@ -66,9 +79,10 @@ class SuccessViewController: BaseViewController {
             }
             
             switch result {
-            case .success(let pokemonString):
-                print(pokemonString)
-                //TODO: Convert pokemonString to Pokemon and add it to db
+            case .success(let data):
+                let decoder = JSONDecoder()
+                let pokemon = try? decoder.decode(Pokemon.self, from: data)
+                strongSelf.pokemon = pokemon
                 DispatchQueue.main.async {
                     strongSelf.updateUI()
                 }
@@ -76,7 +90,8 @@ class SuccessViewController: BaseViewController {
                 print(String(describing: error))
             }
             
-        })
+        }
+
     }
 
     // MARK: - IBAction
