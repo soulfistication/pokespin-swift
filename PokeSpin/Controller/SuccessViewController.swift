@@ -58,7 +58,11 @@ class SuccessViewController: BaseViewController {
             let weight = 23
             let height = 45
             let experience = 145
-            let pokemon = Pokemon(id: dittoPokemonNumber, name: pokemonName, weight: weight, height: height, baseExperience: experience)
+            let pokemon = Pokemon(id: dittoPokemonNumber, 
+                                  name: pokemonName,
+                                  weight: weight,
+                                  height: height,
+                                  baseExperience: experience)
             self.pokemon = pokemon
             pokemonNameLabel.text = pokemonName
             pokemonWeightLabel.text = String(weight)
