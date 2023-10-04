@@ -28,24 +28,28 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
     // MARK: - UICollectionViewData Source
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18 // I decided to use the first 18 Pokemons
+        return Constants.numberOfPokemonsDisplayed
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIdentifiers.pokemonCollectionViewCell.rawValue, for: indexPath) as! PokemonCollectionViewCell
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIdentifiers.pokemonCollectionViewCell.rawValue, for: indexPath) as? PokemonCollectionViewCell else {
+            return UICollectionViewCell()
+        }
 
         var image: String?
 
         // Remember Pokemon numbers start at 1 not zero.
         let pokemonNumber = indexPath.row + 1
-        let pokemonNumberString = String(pokemonNumber)
+        let pokemon = PokemonManager.fetchPokemon(number: pokemonNumber)
+        let isUnlocked = pokemon?.isUnlocked ?? false
 
         // If Pokemon is unlocked we show the image if not the number
-        if Pokemon.pokemonIsUnlocked(number: pokemonNumber) {
-            image = pokemonNumberString
+        if isUnlocked {
+            image = String(pokemonNumber)
             cell.prepareForDisplay(with: nil, image: image)
         } else {
-            cell.prepareForDisplay(with: pokemonNumberString, image: nil)
+            cell.prepareForDisplay(with: String(pokemonNumber), image: nil)
         }
 
         return cell
@@ -54,7 +58,12 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if Pokemon.pokemonIsUnlocked(number: indexPath.row + 1) {
+        
+        let pokemonNumber = indexPath.row + 1
+        let pokemon = PokemonManager.fetchPokemon(number: pokemonNumber)
+        let isUnlocked = pokemon?.isUnlocked ?? false
+        
+        if isUnlocked {
             performSegue(withIdentifier: Constants.SegueIdentifier.openPokemonUnlocked.rawValue, sender: indexPath)
         } else {
             performSegue(withIdentifier: Constants.SegueIdentifier.openSlotMachine.rawValue, sender: indexPath)
@@ -77,11 +86,11 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
         let indexPath = sender as! IndexPath
         let pokemonNumber = indexPath.row + 1
         if segue.identifier == Constants.SegueIdentifier.openSlotMachine.rawValue {
-            let slotMachineViewController = segue.destination as! SlotMachineViewController
-            slotMachineViewController.pokemonNumber = indexPath.row + 1
+            guard let slotMachineViewController = segue.destination as? SlotMachineViewController else { return }
+            slotMachineViewController.pokemonNumber = pokemonNumber
             slotMachineViewController.delegate = self
         } else if segue.identifier == Constants.SegueIdentifier.openPokemonUnlocked.rawValue {
-            let successViewController = segue.destination as! SuccessViewController
+            guard let successViewController = segue.destination as? SuccessViewController else { return }
             successViewController.unlocked = true
             successViewController.pokemonNumber = pokemonNumber
             successViewController.delegate = self

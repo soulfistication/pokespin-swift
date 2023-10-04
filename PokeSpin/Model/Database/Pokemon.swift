@@ -16,9 +16,9 @@ struct Pokemon: Codable {
     var height: Int = 0
     var baseExperience: Int = 0
 
-    // MARK: - RLMObject
-
-    static func pokemonIsUnlocked(number: Int) -> Bool {
+    // MARK: - Computed Properties
+    
+    var isUnlocked: Bool {
         return false
     }
     

@@ -25,6 +25,7 @@
 		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
 		24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB42010C55E00E359DB /* ScreenDismissable.swift */; };
 		24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */; };
+		84DEA9432ACD6E0D00472C1F /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C80AB42010C55E00E359DB /* ScreenDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismissable.swift; sourceTree = "<group>"; };
 		24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewCell.swift; sourceTree = "<group>"; };
+		84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				24C80AA72010AFD700E359DB /* Pokemon.swift */,
+				84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C80A9A2010AD8B00E359DB /* PokemonCollectionViewController.swift in Sources */,
+				84DEA9432ACD6E0D00472C1F /* PokemonManager.swift in Sources */,
 				24C80AB32010BCFB00E359DB /* Constants.swift in Sources */,
 				24C80AA62010AEF900E359DB /* Environment.swift in Sources */,
 				24C80A982010AD3400E359DB /* IntroViewController.swift in Sources */,
