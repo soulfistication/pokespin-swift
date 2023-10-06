@@ -86,6 +86,7 @@ class SuccessViewController: BaseViewController {
                 let decoder = JSONDecoder()
                 decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
                 if let pokemon = try? decoder.decode(Pokemon.self, from: data) {
+                    pokemon.isUnlocked = true
                     strongSelf.pokemon = pokemon
                     PokemonManager.addPokemon(pokemon: pokemon)
                     DispatchQueue.main.async {
