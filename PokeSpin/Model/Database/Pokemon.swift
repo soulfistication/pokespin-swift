@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ivan. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct Pokemon: Codable {
 
@@ -15,12 +15,7 @@ struct Pokemon: Codable {
     var weight: Int = 0
     var height: Int = 0
     var baseExperience: Int = 0
-
-    // MARK: - Computed Properties
-    
-    var isUnlocked: Bool {
-        return false
-    }
+    var isUnlocked: Bool = false
     
     // MARK: - Codable
     
