@@ -59,12 +59,6 @@ class SuccessViewController: BaseViewController {
             let weight = 23
             let height = 45
             let experience = 145
-            let pokemon = Pokemon(id: dittoPokemonNumber, 
-                                  name: pokemonName,
-                                  weight: weight,
-                                  height: height,
-                                  baseExperience: experience)
-            self.pokemon = pokemon
             pokemonNameLabel.text = pokemonName
             pokemonWeightLabel.text = String(weight)
             pokemonHeightLabel.text = String(height)
@@ -74,6 +68,9 @@ class SuccessViewController: BaseViewController {
     }
     
     func fetchPokemon() {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
         activityIndicatorView.startAnimating()
         
         client.requestJSONData(pokemon: pokemonNumber) { [weak self] result in
@@ -87,6 +84,7 @@ class SuccessViewController: BaseViewController {
             switch result {
             case .success(let data):
                 let decoder = JSONDecoder()
+                decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
                 if let pokemon = try? decoder.decode(Pokemon.self, from: data) {
                     strongSelf.pokemon = pokemon
                     PokemonManager.addPokemon(pokemon: pokemon)
