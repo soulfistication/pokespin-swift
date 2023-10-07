@@ -63,8 +63,8 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
         let secondHit = secondSymbol == thirdSymbol
         let thirdHit = firstSymbol == thirdSymbol
 
-        let successHit = firstHit && secondHit
-        //let successHit = true // Make it always win
+        //let successHit = firstHit && secondHit
+        let successHit = true // Make it always win
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             if successHit {
@@ -91,11 +91,11 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
     // MARK: - UIPickerView Data Source
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        return Constants.numberOfColumnsInSlotMachine
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 36
+        return Constants.numberOfRowsInSlotMachine
     }
 
     // MARK: - UIPickerView Delegate
