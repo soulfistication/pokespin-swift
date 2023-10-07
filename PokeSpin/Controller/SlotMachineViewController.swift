@@ -121,11 +121,9 @@ class SlotMachineViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     // MARK: - Screen Dismissable
 
-    func screenDidDismissed() {
+    func screenDismissed() {
         dismiss(animated: true) { [weak self] in
-            if let delegate = self?.delegate, delegate.responds(to: #selector(delegate.screenDidDismissed)) {
-                delegate.screenDidDismissed()
-            }
+            self?.delegate?.screenDismissed()
         }
     }
 

@@ -76,7 +76,7 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
 
     // MARK: - ScreenDismissable
 
-    func screenDidDismissed() {
+    func screenDismissed() {
         collectionView.reloadData()
     }
 

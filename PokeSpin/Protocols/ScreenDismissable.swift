@@ -9,5 +9,5 @@
 import Foundation
 
 @objc protocol ScreenDismissable: NSObjectProtocol {
-    func screenDidDismissed()
+    func screenDismissed()
 }

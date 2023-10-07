@@ -105,7 +105,7 @@ class SuccessViewController: BaseViewController {
 
     @IBAction func closeButtonTapped(sender: AnyObject) {
         dismiss(animated: true) { [weak self] in
-            self?.delegate?.screenDidDismissed()
+            self?.delegate?.screenDismissed()
         }
     }
 
