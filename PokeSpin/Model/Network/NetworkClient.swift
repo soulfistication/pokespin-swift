@@ -21,26 +21,23 @@ struct NetworkClient {
     let apiVersion = "api/v2"
     let endpoint = "pokemon"
     
-    func requestJSON(pokemon: Int) async -> Data {
+    func requestJSON(pokemon: Int) async throws -> Data {
         guard let url = URL(string: "\(baseURL)/\(apiVersion)/\(endpoint)/\(pokemon)") else { return Data() }
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         do {
-            let dataTask = try await urlSession.data(from: url)
-            return dataTask.0
+            let (data, response) = try await urlSession.data(from: url)
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw APIError.badResponse }
+            return data
         } catch (let error) {
-            print(String(describing: error))
-            return Data()
+            throw error
         }
     }
     
     func requestJSONData(pokemon: Int, completion: @escaping (Result<Data, Error>) -> Void) {
         
-        guard let url = URL(string: "\(baseURL)/\(apiVersion)/\(endpoint)/\(pokemon)") else {
-            return
-        }
+        guard let url = URL(string: "\(baseURL)/\(apiVersion)/\(endpoint)/\(pokemon)") else { return }
         
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
-        
         let dataTask = urlSession.dataTask(with: url) { data, response, error in
             
             guard error == nil else {

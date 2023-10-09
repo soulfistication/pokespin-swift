@@ -73,12 +73,11 @@ class SuccessViewController: BaseViewController {
     
     func fetchPokemon() async -> Pokemon? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        let pokemonData = await client.requestJSON(pokemon: pokemonNumber)
-        
-        let decoder = JSONDecoder()
-        decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
         
         do {
+            let pokemonData = try await client.requestJSON(pokemon: pokemonNumber)
+            let decoder = JSONDecoder()
+            decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
             let pokemon = try decoder.decode(Pokemon.self, from: pokemonData)
             pokemon.isUnlocked = true
             self.pokemon = pokemon
