@@ -37,7 +37,11 @@ class SuccessViewController: BaseViewController {
         if isUnlocked {
             updateUI()
         } else {
-            fetchPokemon()
+            Task {
+                self.pokemon = await fetchPokemon()
+                self.updateUI()
+            }
+
         }
     }
 
@@ -67,36 +71,22 @@ class SuccessViewController: BaseViewController {
         }
     }
     
-    func fetchPokemon() {
+    func fetchPokemon() async -> Pokemon? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        let pokemonData = await client.requestJSON(pokemon: pokemonNumber)
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let decoder = JSONDecoder()
+        decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
         
-        activityIndicatorView.startAnimating()
-        
-        client.requestJSONData(pokemon: pokemonNumber) { [weak self] result in
-            guard let strongSelf = self else { return }
-            
-            DispatchQueue.main.async {
-                strongSelf.activityIndicatorView.stopAnimating()
-                strongSelf.activityIndicatorView.isHidden = true
-            }
-            
-            switch result {
-            case .success(let data):
-                let decoder = JSONDecoder()
-                decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
-                if let pokemon = try? decoder.decode(Pokemon.self, from: data) {
-                    pokemon.isUnlocked = true
-                    strongSelf.pokemon = pokemon
-                    PokemonManager.addPokemon(pokemon: pokemon)
-                    DispatchQueue.main.async {
-                        strongSelf.updateUI()
-                    }
-                }
-            case .failure(let error):
-                print(String(describing: error))
-            }
-            
+        do {
+            let pokemon = try decoder.decode(Pokemon.self, from: pokemonData)
+            pokemon.isUnlocked = true
+            self.pokemon = pokemon
+            PokemonManager.addPokemon(pokemon: pokemon)
+            return pokemon
+        } catch (let error) {
+            print(String(describing: error))
+            return nil
         }
 
     }
