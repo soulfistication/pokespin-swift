@@ -11,6 +11,8 @@ import Foundation
 enum APIError: Error {
     case emptyData
     case wrongEncoding
+    case badResponse
+    case badStatusCode
 }
 
 struct NetworkClient {
@@ -46,6 +48,16 @@ struct NetworkClient {
                 return
             }
             
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(APIError.badResponse))
+                return
+            }
+            
+            guard response.statusCode == 200 else {
+                completion(.failure(APIError.badStatusCode))
+                return
+            }
+            
             guard let data = data else {
                 completion(.failure(APIError.emptyData))
                 return
@@ -67,6 +79,16 @@ struct NetworkClient {
             
             guard error == nil else {
                 completion(.failure(error!))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(APIError.badResponse))
+                return
+            }
+            
+            guard response.statusCode == 200 else {
+                completion(.failure(APIError.badStatusCode))
                 return
             }
 
