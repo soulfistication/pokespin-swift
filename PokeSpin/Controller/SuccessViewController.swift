@@ -37,6 +37,7 @@ class SuccessViewController: BaseViewController {
         if isUnlocked {
             updateUI()
         } else {
+            self.activityIndicatorView.startAnimating()
             Task {
                 self.pokemon = await fetchPokemon()
                 self.updateUI()
@@ -48,9 +49,11 @@ class SuccessViewController: BaseViewController {
     // MARK: - Helpers
     func setupUI() {
         view.backgroundColor = UIColor.creamyBlue
+        self.activityIndicatorView.hidesWhenStopped = true
     }
 
     func updateUI() {
+        self.activityIndicatorView.stopAnimating()
         if let pokemon = self.pokemon {
             pokemonNameLabel.text = pokemon.name
             pokemonWeightLabel.text = String(pokemon.weight)
