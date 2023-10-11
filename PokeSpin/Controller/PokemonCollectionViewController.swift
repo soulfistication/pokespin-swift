@@ -22,7 +22,7 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
     // MARK: - Setup UI
 
     func setupUI() {
-        title = "Collection"
+        title = "Pokemons"
     }
 
     // MARK: - UICollectionViewData Source
