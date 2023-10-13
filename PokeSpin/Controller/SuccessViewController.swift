@@ -15,6 +15,8 @@ class SuccessViewController: BaseViewController {
     weak var delegate: ScreenDismissable?
     
     var pokemon: Pokemon?
+    
+    var isUnlocked: Bool { return pokemon?.isUnlocked ?? false }
 
     // MARK: - IBOutlets
 
@@ -32,8 +34,6 @@ class SuccessViewController: BaseViewController {
 
         setupUI()
         
-        let isUnlocked = pokemon?.isUnlocked ?? false
-
         if isUnlocked {
             updateUI()
         } else {
@@ -42,7 +42,6 @@ class SuccessViewController: BaseViewController {
                 self.pokemon = await fetchPokemon()
                 self.updateUI()
             }
-
         }
     }
 

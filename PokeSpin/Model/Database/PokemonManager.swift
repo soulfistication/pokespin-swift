@@ -17,8 +17,10 @@ protocol IPokemonStorage {
 
 struct PokemonManager: IPokemonStorage {
     
+    static let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
     static func fetchPokemon(number: Int) -> Pokemon? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        guard let appDelegate = appDelegate else { return nil }
         let managedContext = appDelegate.coreDataStack.managedContext
         let pokemonFetchRequest = Pokemon.fetchRequest()
         do {
@@ -28,13 +30,13 @@ struct PokemonManager: IPokemonStorage {
         } catch (let error as NSError) {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-        
         return nil
     }
     
     static func addPokemon(pokemon: Pokemon) {
+        guard let appDelegate = appDelegate else { return }
+
         DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             let managedContext = appDelegate.coreDataStack.managedContext
             do {
                 try managedContext.save()
@@ -45,7 +47,8 @@ struct PokemonManager: IPokemonStorage {
     }
     
     static func fetchAllPokemons() -> [Pokemon] {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [Pokemon]() }
+        guard let appDelegate = appDelegate else { return [Pokemon]() }
+
         let managedContext = appDelegate.coreDataStack.managedContext
         let pokemonFetchRequest = Pokemon.fetchRequest()
         do {
@@ -58,7 +61,7 @@ struct PokemonManager: IPokemonStorage {
     }
     
     static func deleteAllPokemon() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        guard let appDelegate = appDelegate else { return }
         let managedContext = appDelegate.coreDataStack.managedContext
         let allPokemons = PokemonManager.fetchAllPokemons()
         for pokemon in allPokemons {
