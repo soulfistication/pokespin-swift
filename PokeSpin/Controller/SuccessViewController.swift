@@ -13,9 +13,8 @@ class SuccessViewController: BaseViewController {
     var pokemonNumber = 0
     var client = NetworkClient()
     weak var delegate: ScreenDismissable?
-    
+
     var pokemon: Pokemon?
-    
     var isUnlocked: Bool { return pokemon?.isUnlocked ?? false }
 
     // MARK: - IBOutlets
@@ -31,9 +30,8 @@ class SuccessViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
-        
+
         if isUnlocked {
             updateUI()
         } else {
@@ -72,7 +70,7 @@ class SuccessViewController: BaseViewController {
             pokemonImageView.image = UIImage(named: String(dittoPokemonNumber))
         }
     }
-    
+
     func fetchPokemon() async -> Pokemon? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
         

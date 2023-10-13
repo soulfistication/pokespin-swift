@@ -16,9 +16,9 @@ protocol IPokemonStorage {
 }
 
 struct PokemonManager: IPokemonStorage {
-    
+
     static let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    
+
     static func fetchPokemon(number: Int) -> Pokemon? {
         guard let appDelegate = appDelegate else { return nil }
         let managedContext = appDelegate.coreDataStack.managedContext
@@ -32,7 +32,7 @@ struct PokemonManager: IPokemonStorage {
         }
         return nil
     }
-    
+
     static func addPokemon(pokemon: Pokemon) {
         guard let appDelegate = appDelegate else { return }
 
@@ -45,7 +45,7 @@ struct PokemonManager: IPokemonStorage {
             }
         }
     }
-    
+
     static func fetchAllPokemons() -> [Pokemon] {
         guard let appDelegate = appDelegate else { return [Pokemon]() }
 
@@ -59,7 +59,7 @@ struct PokemonManager: IPokemonStorage {
         }
         return [Pokemon]()
     }
-    
+
     static func deleteAllPokemon() {
         guard let appDelegate = appDelegate else { return }
         let managedContext = appDelegate.coreDataStack.managedContext

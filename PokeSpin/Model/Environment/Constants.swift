@@ -9,11 +9,11 @@
 import Foundation
 
 struct Constants {
-    
+
     static let numberOfPokemonsDisplayed = 18
     static let numberOfColumnsInSlotMachine = 3
     static let numberOfRowsInSlotMachine = 36
-    
+
     enum SegueIdentifier: String {
         case openSlotMachine = "ELSegueIdentifierOpenSlotMachine";
         case openSuccess = "ELSegueIdentifierOpenSuccessSlotMachine";

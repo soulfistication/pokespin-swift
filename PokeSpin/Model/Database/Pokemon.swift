@@ -9,9 +9,9 @@
 import CoreData
 
 class Pokemon: NSManagedObject, Decodable {
-    
+
     required convenience init(from decoder: Decoder) throws {
-        
+
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             throw DecoderConfigurationError.missingManagedObjectContext
         }
@@ -25,7 +25,7 @@ class Pokemon: NSManagedObject, Decodable {
         self.height = try container.decode(Int16.self, forKey: .height)
         self.baseExperience = try container.decode(Int16.self, forKey: .baseExperience)
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
@@ -33,7 +33,7 @@ class Pokemon: NSManagedObject, Decodable {
         case height = "height"
         case baseExperience = "base_experience"
     }
-    
+
 }
 
 extension CodingUserInfoKey {

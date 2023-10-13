@@ -16,11 +16,11 @@ enum APIError: Error {
 }
 
 struct NetworkClient {
-    
+
     let baseURL = Constants.ApiURL.baseURL.rawValue
     let apiVersion = "api/v2"
     let endpoint = "pokemon"
-    
+
     func requestJSON(pokemon: Int) async throws -> Data {
         guard let url = URL(string: "\(baseURL)/\(apiVersion)/\(endpoint)/\(pokemon)") else { return Data() }
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
@@ -32,7 +32,7 @@ struct NetworkClient {
             throw error
         }
     }
-    
+
     func requestJSONData(pokemon: Int, completion: @escaping (Result<Data, Error>) -> Void) {
         guard let url = URL(string: "\(baseURL)/\(apiVersion)/\(endpoint)/\(pokemon)") else { return }
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
