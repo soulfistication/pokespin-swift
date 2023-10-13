@@ -62,6 +62,7 @@ struct PokemonManager: IPokemonStorage {
 
     static func deleteAllPokemon() {
         guard let appDelegate = appDelegate else { return }
+        
         let managedContext = appDelegate.coreDataStack.managedContext
         let allPokemons = PokemonManager.fetchAllPokemons()
         for pokemon in allPokemons {
