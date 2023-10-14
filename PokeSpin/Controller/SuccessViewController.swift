@@ -17,6 +17,8 @@ class SuccessViewController: BaseViewController {
     var pokemon: Pokemon?
     var isUnlocked: Bool { return pokemon?.isUnlocked ?? false }
 
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+
     // MARK: - IBOutlets
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -49,6 +51,7 @@ class SuccessViewController: BaseViewController {
         self.activityIndicatorView.hidesWhenStopped = true
     }
 
+    @MainActor
     func updateUI() {
         self.activityIndicatorView.stopAnimating()
         if let pokemon = self.pokemon {
@@ -57,22 +60,11 @@ class SuccessViewController: BaseViewController {
             pokemonHeightLabel.text = String(pokemon.height)
             pokemonBaseExperienceLabel.text = String(pokemon.baseExperience)
             pokemonImageView.image = UIImage(named: String(pokemonNumber))
-        } else {
-            let dittoPokemonNumber = 1
-            let pokemonName = "Ditto"
-            let weight = 23
-            let height = 45
-            let experience = 145
-            pokemonNameLabel.text = pokemonName
-            pokemonWeightLabel.text = String(weight)
-            pokemonHeightLabel.text = String(height)
-            pokemonBaseExperienceLabel.text = String(experience)
-            pokemonImageView.image = UIImage(named: String(dittoPokemonNumber))
         }
     }
 
     func fetchPokemon() async -> Pokemon? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        guard let appDelegate = appDelegate else { return nil }
         
         do {
             let pokemonData = try await client.requestJSON(pokemon: pokemonNumber)
