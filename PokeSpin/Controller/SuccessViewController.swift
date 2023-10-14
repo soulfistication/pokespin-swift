@@ -46,6 +46,7 @@ class SuccessViewController: BaseViewController {
     }
 
     // MARK: - Helpers
+    @MainActor
     func setupUI() {
         view.backgroundColor = UIColor.creamyBlue
         self.activityIndicatorView.hidesWhenStopped = true
