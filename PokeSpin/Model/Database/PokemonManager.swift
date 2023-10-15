@@ -20,7 +20,7 @@ struct PokemonManager: IPokemonStorage {
     static let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     static func fetchPokemon(number: Int) -> Pokemon? {
-        guard let appDelegate = appDelegate else { return nil }
+        guard let appDelegate else { return nil }
         let managedContext = appDelegate.coreDataStack.managedContext
         let pokemonFetchRequest = Pokemon.fetchRequest()
         do {
@@ -34,7 +34,7 @@ struct PokemonManager: IPokemonStorage {
     }
 
     static func addPokemon(pokemon: Pokemon) {
-        guard let appDelegate = appDelegate else { return }
+        guard let appDelegate else { return }
 
         DispatchQueue.main.async {
             let managedContext = appDelegate.coreDataStack.managedContext
@@ -47,7 +47,7 @@ struct PokemonManager: IPokemonStorage {
     }
 
     static func fetchAllPokemons() -> [Pokemon] {
-        guard let appDelegate = appDelegate else { return [Pokemon]() }
+        guard let appDelegate else { return [Pokemon]() }
 
         let managedContext = appDelegate.coreDataStack.managedContext
         let pokemonFetchRequest = Pokemon.fetchRequest()
@@ -61,7 +61,7 @@ struct PokemonManager: IPokemonStorage {
     }
 
     static func deleteAllPokemon() {
-        guard let appDelegate = appDelegate else { return }
+        guard let appDelegate else { return }
         
         let managedContext = appDelegate.coreDataStack.managedContext
         let allPokemons = PokemonManager.fetchAllPokemons()

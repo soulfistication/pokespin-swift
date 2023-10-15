@@ -65,7 +65,7 @@ class SuccessViewController: BaseViewController {
     }
 
     func fetchPokemon() async -> Pokemon? {
-        guard let appDelegate = appDelegate else { return nil }
+        guard let appDelegate else { return nil }
         
         do {
             let pokemonData = try await client.requestJSON(pokemon: pokemonNumber)
