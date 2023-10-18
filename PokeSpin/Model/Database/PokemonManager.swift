@@ -8,14 +8,6 @@
 
 import UIKit
 
-protocol IPokemonStorage {
-    static func add(pokemon: Pokemon)
-    static func fetchPokemon(number: Int) -> Pokemon?
-    static func fetchPokemons() -> [Pokemon]
-    static func deletePokemon(number: Int)
-    static func deletePokemons()
-}
-
 struct PokemonManager: IPokemonStorage {
 
     static let appDelegate = UIApplication.shared.delegate as? AppDelegate
