@@ -37,8 +37,6 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
             return UICollectionViewCell()
         }
 
-        var image: String?
-
         // Remember Pokemon numbers start at 1 not zero.
         let pokemonNumber = indexPath.row + 1
         let pokemon = PokemonManager.fetchPokemon(number: pokemonNumber)
@@ -46,8 +44,7 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
 
         // If Pokemon is unlocked we show the image if not the number
         if isUnlocked {
-            image = String(pokemonNumber)
-            cell.prepareForDisplay(with: nil, image: image)
+            cell.prepareForDisplay(with: nil, image: String(pokemonNumber))
         } else {
             cell.prepareForDisplay(with: String(pokemonNumber), image: nil)
         }
