@@ -74,7 +74,7 @@ class SuccessViewController: BaseViewController {
             let pokemon = try decoder.decode(Pokemon.self, from: pokemonData)
             pokemon.isUnlocked = true
             self.pokemon = pokemon
-            PokemonManager.addPokemon(pokemon: pokemon)
+            PokemonManager.add(pokemon: pokemon)
             return pokemon
         } catch (let error) {
             print(String(describing: error))

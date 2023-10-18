@@ -44,7 +44,7 @@ class IntroViewController: BaseViewController {
     // MARK: - Helpers
 
     func resetProgress() {
-        PokemonManager.deleteAllPokemon()
+        PokemonManager.deletePokemons()
     }
 
 }

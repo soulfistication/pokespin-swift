@@ -9,10 +9,11 @@
 import UIKit
 
 protocol IPokemonStorage {
-    static func addPokemon(pokemon: Pokemon)
+    static func add(pokemon: Pokemon)
     static func fetchPokemon(number: Int) -> Pokemon?
-    static func fetchAllPokemons() -> [Pokemon]
-    static func deleteAllPokemon()
+    static func fetchPokemons() -> [Pokemon]
+    static func deletePokemon(number: Int)
+    static func deletePokemons()
 }
 
 struct PokemonManager: IPokemonStorage {
@@ -26,13 +27,13 @@ struct PokemonManager: IPokemonStorage {
         do {
             let fetchResults = try managedContext.fetch(pokemonFetchRequest)
             return fetchResults.filter { $0.id == number }.first
-        } catch (let error as NSError) {
-            print("Fetch error: \(error) description: \(error.userInfo)")
+        } catch (let error) {
+            print(String(describing: error))
         }
         return nil
     }
 
-    static func addPokemon(pokemon: Pokemon) {
+    static func add(pokemon: Pokemon) {
         guard let appDelegate else { return }
 
         DispatchQueue.main.async {
@@ -45,7 +46,7 @@ struct PokemonManager: IPokemonStorage {
         }
     }
 
-    static func fetchAllPokemons() -> [Pokemon] {
+    static func fetchPokemons() -> [Pokemon] {
         guard let appDelegate else { return [Pokemon]() }
 
         let managedContext = appDelegate.coreDataStack.managedContext
@@ -53,25 +54,36 @@ struct PokemonManager: IPokemonStorage {
         do {
             let fetchResults = try managedContext.fetch(pokemonFetchRequest)
             return fetchResults
-        } catch (let error as NSError) {
-            print("Fetch All error: \(error) description: \(error.userInfo)")
+        } catch (let error) {
+            print(String(describing: error))
         }
         return [Pokemon]()
     }
 
-    static func deleteAllPokemon() {
+    static func deletePokemon(number: Int) {
+        guard let appDelegate else { return }
+        guard let pokemon = self.fetchPokemon(number: number) else { return }
+
+        let managedContext = appDelegate.coreDataStack.managedContext
+        managedContext.delete(pokemon)
+
+        do {
+            try managedContext.save()
+        } catch (let error) {
+            print(String(describing: error))
+        }
+    }
+
+    static func deletePokemons() {
         guard let appDelegate else { return }
         
         let managedContext = appDelegate.coreDataStack.managedContext
-        let allPokemons = PokemonManager.fetchAllPokemons()
-        allPokemons.forEach { pokemon in
-            managedContext.delete(pokemon)
-        }
+        PokemonManager.fetchPokemons().forEach { managedContext.delete($0) }
 
         do {
             try managedContext.save()
         } catch (let error as NSError) {
-            print("Delete All error: \(error) description: \(error.userInfo)")
+            print(String(describing: error))
         }
     }
 
