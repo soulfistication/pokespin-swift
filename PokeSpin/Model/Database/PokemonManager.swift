@@ -25,8 +25,7 @@ struct PokemonManager: IPokemonStorage {
         let pokemonFetchRequest = Pokemon.fetchRequest()
         do {
             let fetchResults = try managedContext.fetch(pokemonFetchRequest)
-            let filtered = fetchResults.filter { $0.id == number }
-            return filtered.first
+            return fetchResults.filter { $0.id == number }.first
         } catch (let error as NSError) {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
@@ -65,9 +64,10 @@ struct PokemonManager: IPokemonStorage {
         
         let managedContext = appDelegate.coreDataStack.managedContext
         let allPokemons = PokemonManager.fetchAllPokemons()
-        for pokemon in allPokemons {
+        allPokemons.forEach { pokemon in
             managedContext.delete(pokemon)
         }
+
         do {
             try managedContext.save()
         } catch (let error as NSError) {
