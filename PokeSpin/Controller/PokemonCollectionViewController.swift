@@ -83,7 +83,7 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let indexPath = sender as! IndexPath
+        guard let indexPath = sender as? IndexPath else { return }
         let pokemonNumber = indexPath.row + 1
         if segue.identifier == Constants.SegueIdentifier.openSlotMachine.rawValue {
             guard let slotMachineViewController = segue.destination as? SlotMachineViewController else { return }
