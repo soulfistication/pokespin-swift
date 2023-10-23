@@ -12,7 +12,7 @@ You do so by spinning a slot machine and unlocking one Pokemon at a time.
 <img width="365" alt="2" src="https://github.com/soulfistication/pokespin-swift/assets/367646/c11a1712-e0f5-48b1-ac7a-9f861416629a">
 
 
-<img width="363" alt="3" src="https://github.com/soulfistication/pokespin-swift/assets/367646/623d0914-54c5-4e3d-9cdf-9d9acf6b61c0">
+<img width="369" alt="3" src="https://github.com/soulfistication/pokespin-swift/assets/367646/eeb5845f-3796-4641-837b-eb775f5f7e27">
 
 
 <img width="362" alt="4" src="https://github.com/soulfistication/pokespin-swift/assets/367646/b577f330-ca75-4a02-905d-b2f52f2a8df0">
