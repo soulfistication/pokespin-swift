@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		244131FA2C3F0A17000C7BE4 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */; };
 		24C80A802010A83000E359DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A7F2010A83000E359DB /* AppDelegate.swift */; };
 		24C80A852010A83000E359DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C80A832010A83000E359DB /* Main.storyboard */; };
 		24C80A872010A83000E359DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24C80A862010A83000E359DB /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		24C80A7C2010A83000E359DB /* PokeSpin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeSpin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24C80A7F2010A83000E359DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24C80A842010A83000E359DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				24C80AB02010BAF700E359DB /* AppColors.swift */,
+				244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */,
 				2C374B2A2ADFD95E00F0572F /* IPokemonStorage.swift in Sources */,
 				24C80A9C2010AD9800E359DB /* SlotMachineViewController.swift in Sources */,
+				244131FA2C3F0A17000C7BE4 /* UIViewExtensions.swift in Sources */,
 				84DEA9462AD00E0000472C1F /* PokemonDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

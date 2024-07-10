@@ -14,6 +14,10 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+#if DEBUG
+        print(view.recursiveDescription(depth: 0))
+#endif
     }
 
 }
