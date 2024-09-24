@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hd3-bE-0Vq">
-                                <rect key="frame" x="47.5" y="385.5" width="280" height="140"/>
+                                <rect key="frame" x="47.5" y="375.5" width="280" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="Lq1-IE-WHf"/>
@@ -74,7 +74,7 @@
                             <constraint firstItem="gk0-2F-5YH" firstAttribute="top" secondItem="xxD-cG-jT9" secondAttribute="bottom" constant="10" id="mlg-Sd-8zz"/>
                             <constraint firstItem="uF7-x3-cBi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="-20" id="mpE-ka-VKF"/>
                             <constraint firstItem="xxD-cG-jT9" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oEr-Pi-BWl"/>
-                            <constraint firstItem="hd3-bE-0Vq" firstAttribute="top" secondItem="uF7-x3-cBi" secondAttribute="bottom" constant="30" id="sNr-KE-qrp"/>
+                            <constraint firstItem="hd3-bE-0Vq" firstAttribute="top" secondItem="uF7-x3-cBi" secondAttribute="bottom" constant="20" id="sNr-KE-qrp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -97,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D1F-hC-cWx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="15" y="59" width="345" height="608"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="17" minimumInteritemSpacing="10" id="eMV-lO-Fsz">
                                     <size key="itemSize" width="100" height="95"/>
@@ -148,10 +148,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vjj-rF-Mvd" firstAttribute="top" secondItem="D1F-hC-cWx" secondAttribute="top" constant="-15" id="GNA-Nu-h6o"/>
                             <constraint firstItem="vjj-rF-Mvd" firstAttribute="bottom" secondItem="D1F-hC-cWx" secondAttribute="bottom" id="PX4-Ni-GUI"/>
-                            <constraint firstAttribute="top" secondItem="D1F-hC-cWx" secondAttribute="top" id="Poc-Db-R1o"/>
-                            <constraint firstItem="vjj-rF-Mvd" firstAttribute="trailing" secondItem="D1F-hC-cWx" secondAttribute="trailing" id="Zjq-rZ-DPO"/>
-                            <constraint firstItem="D1F-hC-cWx" firstAttribute="leading" secondItem="vjj-rF-Mvd" secondAttribute="leading" id="b6g-Uc-8cq"/>
+                            <constraint firstItem="vjj-rF-Mvd" firstAttribute="trailing" secondItem="D1F-hC-cWx" secondAttribute="trailing" constant="15" id="Zjq-rZ-DPO"/>
+                            <constraint firstItem="D1F-hC-cWx" firstAttribute="leading" secondItem="vjj-rF-Mvd" secondAttribute="leading" constant="15" id="b6g-Uc-8cq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vjj-rF-Mvd"/>
                     </view>
@@ -419,7 +419,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7qu-Yo-Xrb"/>
+        <segue reference="6Ri-tl-Qih"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CloseButtonBlack" width="23" height="25"/>
