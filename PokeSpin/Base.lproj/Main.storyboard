@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xst-dq-akK">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xst-dq-akK">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Futura-Light.ttf">
             <string>Futura-Light</string>
-        </array>
-        <array key="Futura.ttc">
-            <string>Futura-Medium</string>
         </array>
     </customFonts>
     <scenes>
@@ -28,20 +22,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gk0-2F-5YH">
-                                <rect key="frame" x="135" y="577" width="104" height="30"/>
+                                <rect key="frame" x="135.5" y="617" width="104" height="30"/>
                                 <state key="normal" title="Reset Progress"/>
                                 <connections>
                                     <action selector="resetProgressTappedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HLb-JF-euN"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PokeSpinLogo" translatesAutoresizingMaskIntoConstraints="NO" id="b47-WC-7Xd">
-                                <rect key="frame" x="20" y="104" width="335" height="115"/>
+                                <rect key="frame" x="20" y="84" width="335" height="115"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="b47-WC-7Xd" secondAttribute="height" multiplier="804:276" id="We0-oP-Fdp"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hd3-bE-0Vq">
-                                <rect key="frame" x="47" y="345.5" width="280" height="140"/>
+                                <rect key="frame" x="47.5" y="385.5" width="280" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="Lq1-IE-WHf"/>
@@ -52,7 +46,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxD-cG-jT9">
-                                <rect key="frame" x="139" y="532" width="97" height="35"/>
+                                <rect key="frame" x="139" y="572" width="97" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Start Game"/>
                                 <connections>
@@ -60,7 +54,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PokemonStartScreen" translatesAutoresizingMaskIntoConstraints="NO" id="uF7-x3-cBi">
-                                <rect key="frame" x="107.5" y="217.5" width="120" height="136"/>
+                                <rect key="frame" x="107.5" y="219" width="120" height="136.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uF7-x3-cBi" secondAttribute="height" multiplier="600:683" id="Xwn-sn-0qu"/>
                                     <constraint firstAttribute="width" constant="120" id="ZwZ-tr-Bou"/>
@@ -69,18 +63,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gk0-2F-5YH" secondAttribute="bottom" constant="60" id="0Mx-uj-VeV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gk0-2F-5YH" secondAttribute="bottom" constant="20" id="0Mx-uj-VeV"/>
                             <constraint firstItem="b47-WC-7Xd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="4jr-Ef-TjZ"/>
                             <constraint firstItem="b47-WC-7Xd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="51A-ej-Ly3"/>
                             <constraint firstItem="hd3-bE-0Vq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8te-6W-lYf"/>
                             <constraint firstItem="b47-WC-7Xd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="BkQ-r3-WRi"/>
+                            <constraint firstItem="uF7-x3-cBi" firstAttribute="top" secondItem="b47-WC-7Xd" secondAttribute="bottom" constant="20" id="HDZ-TJ-0xF"/>
                             <constraint firstItem="gk0-2F-5YH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eVW-xQ-twL"/>
-                            <constraint firstItem="uF7-x3-cBi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-80" id="eYR-vz-btB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b47-WC-7Xd" secondAttribute="trailing" constant="20" id="ema-tx-sx7"/>
                             <constraint firstItem="gk0-2F-5YH" firstAttribute="top" secondItem="xxD-cG-jT9" secondAttribute="bottom" constant="10" id="mlg-Sd-8zz"/>
                             <constraint firstItem="uF7-x3-cBi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="-20" id="mpE-ka-VKF"/>
                             <constraint firstItem="xxD-cG-jT9" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oEr-Pi-BWl"/>
-                            <constraint firstItem="hd3-bE-0Vq" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="50" id="uS1-D3-OHv"/>
+                            <constraint firstItem="hd3-bE-0Vq" firstAttribute="top" secondItem="uF7-x3-cBi" secondAttribute="bottom" constant="30" id="sNr-KE-qrp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -126,7 +120,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqv-eg-aaH">
-                                                    <rect key="frame" x="7" y="23" width="86" height="50.5"/>
+                                                    <rect key="frame" x="7" y="22.5" width="86" height="50.5"/>
                                                     <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="46"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -177,11 +171,11 @@
             <objects>
                 <viewController id="pCI-Ns-uk5" customClass="SlotMachineViewController" customModule="PokeSpin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wvN-hg-rM8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YHe-Hx-vpI">
-                                <rect key="frame" x="0.0" y="243.5" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="223.5" width="375" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="D4s-3q-4Wj"/>
                                 </constraints>
@@ -191,7 +185,7 @@
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdI-Wq-2jn">
-                                <rect key="frame" x="129" y="574" width="118" height="33"/>
+                                <rect key="frame" x="128.5" y="554" width="118" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Spin the wheel!"/>
                                 <connections>
@@ -199,46 +193,46 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4n-P9-ILa" userLabel="Close Button">
-                                <rect key="frame" x="10" y="30" width="23" height="25"/>
+                                <rect key="frame" x="10" y="10" width="23" height="25"/>
                                 <state key="normal" image="CloseButtonBlack"/>
                                 <connections>
                                     <action selector="closeButtonTappedWithSender:" destination="pCI-Ns-uk5" eventType="touchUpInside" id="cAy-yY-wQR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now playing to unlock Pokemon:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvT-Mv-7q6">
-                                <rect key="frame" x="70.5" y="33" width="235.5" height="19"/>
+                                <rect key="frame" x="70" y="13" width="235.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAW-dR-8vm">
-                                <rect key="frame" x="161" y="72" width="54" height="32"/>
+                                <rect key="frame" x="160.5" y="52" width="54" height="32"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WonPokemon" translatesAutoresizingMaskIntoConstraints="NO" id="FGo-8i-6Se">
-                                <rect key="frame" x="148" y="475.5" width="80" height="112.5"/>
+                                <rect key="frame" x="147.5" y="455.5" width="80" height="112.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="AQP-D1-t1F"/>
                                     <constraint firstAttribute="height" constant="112.5" id="r12-il-aLN"/>
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Won!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34U-vM-n8G">
-                                <rect key="frame" x="146" y="443.5" width="84" height="22"/>
+                                <rect key="frame" x="145.5" y="423.5" width="84" height="22"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SpinPokemon" translatesAutoresizingMaskIntoConstraints="NO" id="2vB-yU-OcQ">
-                                <rect key="frame" x="51.5" y="112" width="112" height="100"/>
+                                <rect key="frame" x="52" y="92" width="111" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2vB-yU-OcQ" secondAttribute="height" multiplier="800:718" id="E2b-TK-ktL"/>
                                     <constraint firstAttribute="height" constant="100" id="nzD-JC-bI5"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Good Luck!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWo-RW-c91">
-                                <rect key="frame" x="170" y="151" width="95" height="23.5"/>
+                                <rect key="frame" x="170" y="130.5" width="95" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -287,72 +281,72 @@
             <objects>
                 <viewController id="O2r-fT-UlL" customClass="SuccessViewController" customModule="PokeSpin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cde-J8-mcw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aei-bt-qYW" userLabel="Close Button">
-                                <rect key="frame" x="10" y="30" width="23" height="25"/>
+                                <rect key="frame" x="10" y="10" width="23" height="25"/>
                                 <state key="normal" image="CloseButtonBlack"/>
                                 <connections>
                                     <action selector="closeButtonTappedWithSender:" destination="O2r-fT-UlL" eventType="touchUpInside" id="GhT-mY-eAG"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0OD-Eq-kTb">
-                                <rect key="frame" x="20" y="85" width="335" height="335"/>
+                                <rect key="frame" x="20" y="65" width="335" height="335"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0OD-Eq-kTb" secondAttribute="height" multiplier="1:1" id="bDA-2V-K3o"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVv-du-8ZR">
-                                <rect key="frame" x="50" y="440" width="58.5" height="24.5"/>
+                                <rect key="frame" x="50" y="420" width="58.5" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAH-fO-uJU">
-                                <rect key="frame" x="50" y="472.5" width="52" height="19"/>
+                                <rect key="frame" x="50" y="452.5" width="52" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BzO-Ji-Nov">
-                                <rect key="frame" x="50" y="499" width="46.5" height="19"/>
+                                <rect key="frame" x="50" y="479.5" width="46.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon 000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-GY-kt0">
-                                <rect key="frame" x="118.5" y="440" width="130" height="24.5"/>
+                                <rect key="frame" x="118.5" y="420" width="130" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3M-JZ-die">
-                                <rect key="frame" x="118.5" y="473" width="21.5" height="19"/>
+                                <rect key="frame" x="118.5" y="452.5" width="21.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79O-mY-XAe">
-                                <rect key="frame" x="118.5" y="499" width="21.5" height="19"/>
+                                <rect key="frame" x="118.5" y="479.5" width="21.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Base Experience:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQH-DV-9Ip">
-                                <rect key="frame" x="50" y="526" width="122" height="19"/>
+                                <rect key="frame" x="50" y="506.5" width="122" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u1-Yp-RXS">
-                                <rect key="frame" x="182" y="526" width="32" height="19"/>
+                                <rect key="frame" x="182" y="506.5" width="32" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlocked Pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfv-EP-g94">
-                                <rect key="frame" x="112.5" y="32" width="150.5" height="21"/>
+                                <rect key="frame" x="112.5" y="12" width="150.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Futura-Light" family="Futura-Light" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -411,7 +405,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xst-dq-akK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="w6D-r4-5Wv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -424,14 +418,14 @@
             <point key="canvasLocation" x="-326" y="131"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="CloseButtonBlack" width="23" height="25"/>
-        <image name="PokeSpinLogo" width="402" height="138"/>
-        <image name="PokemonStartScreen" width="300" height="341"/>
-        <image name="SpinPokemon" width="400" height="359"/>
-        <image name="WonPokemon" width="160" height="224"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7qu-Yo-Xrb"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="CloseButtonBlack" width="23" height="25"/>
+        <image name="PokeSpinLogo" width="402" height="138"/>
+        <image name="PokemonStartScreen" width="300" height="341.5"/>
+        <image name="SpinPokemon" width="400" height="359"/>
+        <image name="WonPokemon" width="160" height="224.5"/>
+    </resources>
 </document>
