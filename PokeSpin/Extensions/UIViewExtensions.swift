@@ -16,7 +16,7 @@ extension UIView {
     }
 
     func head() -> String {
-        let lastIndex = description.index(description.startIndex, offsetBy: 20)
-        return description.substring(to: lastIndex)
+        let lastIndex = description.index(description.startIndex, offsetBy: min(20, description.count))
+        return String(description[..<lastIndex])
     }
 }

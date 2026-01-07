@@ -56,11 +56,32 @@ class SuccessViewController: BaseViewController {
     func updateUI() {
         self.activityIndicatorView.stopAnimating()
         if let pokemon = self.pokemon {
-            pokemonNameLabel.text = pokemon.name
-            pokemonWeightLabel.text = String(pokemon.weight)
-            pokemonHeightLabel.text = String(pokemon.height)
-            pokemonBaseExperienceLabel.text = String(pokemon.baseExperience)
+            pokemonNameLabel.text = pokemon.name.capitalized
+            pokemonNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
+            pokemonWeightLabel.text = "Weight: \(pokemon.weight) kg"
+            pokemonHeightLabel.text = "Height: \(pokemon.height) cm"
+            pokemonBaseExperienceLabel.text = "Base Experience: \(pokemon.baseExperience)"
             pokemonImageView.image = UIImage(named: String(pokemonNumber))
+            
+            // Add celebration animation
+            celebrateUnlock()
+        }
+    }
+    
+    private func celebrateUnlock() {
+        // Scale animation
+        pokemonImageView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: [], animations: {
+            self.pokemonImageView.transform = .identity
+        })
+        
+        // Pulse animation for name
+        UIView.animate(withDuration: 0.5, animations: {
+            self.pokemonNameLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }) { _ in
+            UIView.animate(withDuration: 0.5) {
+                self.pokemonNameLabel.transform = .identity
+            }
         }
     }
 

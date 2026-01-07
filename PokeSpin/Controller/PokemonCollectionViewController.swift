@@ -11,6 +11,12 @@ import UIKit
 class PokemonCollectionViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ScreenDismissable {
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
+    private let gameStats = GameStats.shared
+    private var progressLabelFallback: UILabel?
+    private var progressBarFallback: UIProgressView?
 
     // MARK: - UIViewController
 
@@ -22,7 +28,100 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
     // MARK: - Setup UI
 
     func setupUI() {
-        title = "Pokemons"
+        title = "Pokédex"
+        updateProgress()
+        
+        // Style progress bar
+        progressBar.progressTintColor = .systemGreen
+        progressBar.trackTintColor = .lightGray
+        progressBar.layer.cornerRadius = 4
+        progressBar.clipsToBounds = true
+        
+        // Add navigation bar button for stats
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Stats",
+            style: .plain,
+            target: self,
+            action: #selector(showStats)
+        )
+    }
+    
+    func updateProgress() {
+        let progress = gameStats.collectionProgress / 100.0
+        let unlockedCount = PokemonManager.fetchPokemons().filter { $0.isUnlocked }.count
+        let progressText = "Collection: \(unlockedCount)/\(Constants.numberOfPokemonsDisplayed) (\(String(format: "%.0f", gameStats.collectionProgress))%)"
+        
+        if let progressBar = progressBar {
+            progressBar.setProgress(Float(progress), animated: true)
+        } else {
+            // Create fallback progress bar if not in storyboard
+            if progressBarFallback == nil {
+                let bar = UIProgressView(progressViewStyle: .default)
+                bar.translatesAutoresizingMaskIntoConstraints = false
+                bar.progressTintColor = .systemGreen
+                bar.trackTintColor = .lightGray
+                bar.layer.cornerRadius = 4
+                bar.clipsToBounds = true
+                view.addSubview(bar)
+                NSLayoutConstraint.activate([
+                    bar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+                    bar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                    bar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                    bar.heightAnchor.constraint(equalToConstant: 8)
+                ])
+                progressBarFallback = bar
+            }
+            progressBarFallback?.setProgress(Float(progress), animated: true)
+        }
+        
+        if let progressLabel = progressLabel {
+            progressLabel.text = progressText
+            progressLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            progressLabel.textColor = .darkGray
+        } else {
+            // Create fallback label if not in storyboard
+            if progressLabelFallback == nil {
+                let label = UILabel()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.font = UIFont.boldSystemFont(ofSize: 16)
+                label.textColor = .darkGray
+                label.textAlignment = .center
+                view.addSubview(label)
+                let bar = progressBarFallback ?? progressBar
+                if let bar = bar {
+                    NSLayoutConstraint.activate([
+                        label.topAnchor.constraint(equalTo: bar.bottomAnchor, constant: 8),
+                        label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                    ])
+                } else {
+                    NSLayoutConstraint.activate([
+                        label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+                        label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                    ])
+                }
+                progressLabelFallback = label
+            }
+            progressLabelFallback?.text = progressText
+        }
+    }
+    
+    @objc func showStats() {
+        let stats = gameStats
+        let message = """
+        📊 Game Statistics
+        
+        Total Spins: \(stats.totalSpins)
+        Wins: \(stats.totalWins)
+        Losses: \(stats.totalLosses)
+        Win Rate: \(String(format: "%.1f", stats.winRate))%
+        
+        Collection Progress: \(String(format: "%.0f", stats.collectionProgress))%
+        Energy: \(stats.energy)/\(stats.maxEnergy)
+        """
+        
+        let alert = UIAlertController(title: "Game Statistics", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 
     // MARK: - UICollectionViewData Source
@@ -75,6 +174,12 @@ class PokemonCollectionViewController: BaseViewController, UICollectionViewDataS
 
     func screenDismissed() {
         collectionView.reloadData()
+        updateProgress()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateProgress()
     }
 
     // MARK: - Navigation
