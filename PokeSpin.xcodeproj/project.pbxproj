@@ -24,7 +24,6 @@
 		24C80AAC2010B04900E359DB /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAA2010B04900E359DB /* Futura.ttc */; };
 		24C80AAD2010B04900E359DB /* Futura-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAB2010B04900E359DB /* Futura-Light.ttf */; };
 		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
-		24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB42010C55E00E359DB /* ScreenDismissable.swift */; };
 		2C374B2A2ADFD95E00F0572F /* IPokemonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */; };
 		84DEA9432ACD6E0D00472C1F /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */; };
 		84DEA9462AD00E0000472C1F /* PokemonDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DEA9442AD00DFF00472C1F /* PokemonDataModel.xcdatamodeld */; };
@@ -52,7 +51,6 @@
 		24C80AAA2010B04900E359DB /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
 		24C80AAB2010B04900E359DB /* Futura-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Light.ttf"; sourceTree = "<group>"; };
 		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		24C80AB42010C55E00E359DB /* ScreenDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismissable.swift; sourceTree = "<group>"; };
 		2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPokemonStorage.swift; sourceTree = "<group>"; };
 		84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 		84DEA9452AD00E0000472C1F /* PokemonDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PokemonDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 		24C80AAF2010BAC700E359DB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				24C80AB42010C55E00E359DB /* ScreenDismissable.swift */,
 				2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */,
 			);
 			path = Protocols;
@@ -276,7 +273,6 @@
 				84DEA94A2AD014AD00472C1F /* CoreDataStack.swift in Sources */,
 				24C80A802010A83000E359DB /* AppDelegate.swift in Sources */,
 				242900CC2F0EE0570044CB26 /* GameStats.swift in Sources */,
-				24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */,
 				24C80AA42010AEC000E359DB /* NetworkClient.swift in Sources */,
 				2C374B2A2ADFD95E00F0572F /* IPokemonStorage.swift in Sources */,
 				242900CE2F0EE0710044CB26 /* PokeSpinApp.swift in Sources */,

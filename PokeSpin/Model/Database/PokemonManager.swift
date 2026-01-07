@@ -2,8 +2,8 @@
 //  PokemonManager.swift
 //  PokeSpin
 //
-//  Created by Ivan on 10/4/23.
-//  Copyright © 2023 Ivan. All rights reserved.
+//  Created by Ivan Almada on 10/4/23.
+//  Copyright © 2023 Ivan Almada. All rights reserved.
 //
 
 import UIKit
