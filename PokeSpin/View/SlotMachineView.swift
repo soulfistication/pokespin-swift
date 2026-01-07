@@ -12,7 +12,7 @@ struct SlotMachineView: View {
     let pokemonNumber: Int
     let onDismiss: () -> Void
     
-    //@Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     @State private var selectedRows: [Int] = [4, 4, 4]
     @State private var isSpinning = false
@@ -92,7 +92,7 @@ struct SlotMachineView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Close") {
-                        //dismiss()
+                        dismiss()
                         onDismiss()
                     }
                 }
@@ -104,7 +104,7 @@ struct SlotMachineView: View {
         }
         .alert(alertTitle, isPresented: $showLossAlert) {
             Button("OK") {
-                //dismiss()
+                dismiss()
                 onDismiss()
             }
         } message: {
@@ -112,7 +112,7 @@ struct SlotMachineView: View {
         }
         .fullScreenCover(isPresented: $showSuccess) {
             SuccessView(pokemonNumber: pokemonNumber) {
-                //dismiss()
+                dismiss()
                 onDismiss()
             }
         }

@@ -12,7 +12,7 @@ struct SuccessView: View {
     let pokemonNumber: Int
     let onDismiss: () -> Void
     
-    // @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     @State private var pokemon: Pokemon? = nil
     @State private var isLoading = true
     @State private var scale: CGFloat = 0.1
@@ -68,7 +68,7 @@ struct SuccessView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Close") {
-                        //dismiss()
+                        dismiss()
                         onDismiss()
                     }
                 }
