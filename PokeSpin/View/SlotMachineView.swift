@@ -2,8 +2,8 @@
 //  SlotMachineView.swift
 //  PokeSpin
 //
-//  Created by Auto on 2024.
-//  Copyright © 2024 Auto. All rights reserved.
+//  Created by Ivan Almada on 2024.
+//  Copyright © 2024 Ivan Almada. All rights reserved.
 //
 
 import SwiftUI
@@ -13,6 +13,7 @@ struct SlotMachineView: View {
     let onDismiss: () -> Void
     
     @Environment(\.dismiss) private var dismiss
+    
     @State private var selectedRows: [Int] = [4, 4, 4]
     @State private var isSpinning = false
     @State private var showWinAlert = false
@@ -28,7 +29,7 @@ struct SlotMachineView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.creamyBlue
+                Color.white
                     .ignoresSafeArea()
                 
                 VStack(spacing: 20) {

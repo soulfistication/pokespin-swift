@@ -2,8 +2,8 @@
 //  SuccessView.swift
 //  PokeSpin
 //
-//  Created by Auto on 2024.
-//  Copyright © 2024 Auto. All rights reserved.
+//  Created by Ivan Almada on 2024.
+//  Copyright © 2024 Ivan Almada. All rights reserved.
 //
 
 import SwiftUI

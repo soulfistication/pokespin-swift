@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242900CC2F0EE0570044CB26 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900CB2F0EE0570044CB26 /* GameStats.swift */; };
+		242900CE2F0EE0710044CB26 /* PokeSpinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900CD2F0EE0710044CB26 /* PokeSpinApp.swift */; };
+		242900D52F0EE08C0044CB26 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900CF2F0EE08C0044CB26 /* ContentView.swift */; };
+		242900D62F0EE08C0044CB26 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D02F0EE08C0044CB26 /* IntroView.swift */; };
+		242900D72F0EE08C0044CB26 /* PokemonCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D22F0EE08C0044CB26 /* PokemonCollectionView.swift */; };
+		242900D82F0EE08C0044CB26 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D42F0EE08C0044CB26 /* SuccessView.swift */; };
+		242900D92F0EE08C0044CB26 /* PokemonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D12F0EE08C0044CB26 /* PokemonCellView.swift */; };
+		242900DA2F0EE08C0044CB26 /* SlotMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D32F0EE08C0044CB26 /* SlotMachineView.swift */; };
 		244131FA2C3F0A17000C7BE4 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */; };
 		24C80A802010A83000E359DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A7F2010A83000E359DB /* AppDelegate.swift */; };
 		24C80A852010A83000E359DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C80A832010A83000E359DB /* Main.storyboard */; };
 		24C80A872010A83000E359DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24C80A862010A83000E359DB /* Assets.xcassets */; };
 		24C80A8A2010A83000E359DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C80A882010A83000E359DB /* LaunchScreen.storyboard */; };
-		24C80A962010AD2800E359DB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A952010AD2800E359DB /* BaseViewController.swift */; };
-		24C80A982010AD3400E359DB /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A972010AD3400E359DB /* IntroViewController.swift */; };
-		24C80A9A2010AD8B00E359DB /* PokemonCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A992010AD8B00E359DB /* PokemonCollectionViewController.swift */; };
-		24C80A9C2010AD9800E359DB /* SlotMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A9B2010AD9800E359DB /* SlotMachineViewController.swift */; };
-		24C80A9E2010ADA100E359DB /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A9D2010ADA100E359DB /* SuccessViewController.swift */; };
 		24C80AA42010AEC000E359DB /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AA32010AEC000E359DB /* NetworkClient.swift */; };
 		24C80AA62010AEF900E359DB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AA52010AEF900E359DB /* Environment.swift */; };
 		24C80AAC2010B04900E359DB /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAA2010B04900E359DB /* Futura.ttc */; };
@@ -24,7 +27,6 @@
 		24C80AB12010BAF700E359DB /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB02010BAF700E359DB /* AppColors.swift */; };
 		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
 		24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB42010C55E00E359DB /* ScreenDismissable.swift */; };
-		24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */; };
 		2C374B2A2ADFD95E00F0572F /* IPokemonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */; };
 		84DEA9432ACD6E0D00472C1F /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */; };
 		84DEA9462AD00E0000472C1F /* PokemonDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DEA9442AD00DFF00472C1F /* PokemonDataModel.xcdatamodeld */; };
@@ -33,6 +35,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		242900CB2F0EE0570044CB26 /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
+		242900CD2F0EE0710044CB26 /* PokeSpinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeSpinApp.swift; sourceTree = "<group>"; };
+		242900CF2F0EE08C0044CB26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		242900D02F0EE08C0044CB26 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		242900D12F0EE08C0044CB26 /* PokemonCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCellView.swift; sourceTree = "<group>"; };
+		242900D22F0EE08C0044CB26 /* PokemonCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionView.swift; sourceTree = "<group>"; };
+		242900D32F0EE08C0044CB26 /* SlotMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotMachineView.swift; sourceTree = "<group>"; };
+		242900D42F0EE08C0044CB26 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		24C80A7C2010A83000E359DB /* PokeSpin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeSpin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24C80A7F2010A83000E359DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,11 +50,6 @@
 		24C80A862010A83000E359DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24C80A892010A83000E359DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24C80A8B2010A83000E359DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		24C80A952010AD2800E359DB /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		24C80A972010AD3400E359DB /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
-		24C80A992010AD8B00E359DB /* PokemonCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewController.swift; sourceTree = "<group>"; };
-		24C80A9B2010AD9800E359DB /* SlotMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotMachineViewController.swift; sourceTree = "<group>"; };
-		24C80A9D2010ADA100E359DB /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		24C80AA32010AEC000E359DB /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		24C80AA52010AEF900E359DB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		24C80AAA2010B04900E359DB /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
@@ -52,7 +57,6 @@
 		24C80AB02010BAF700E359DB /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C80AB42010C55E00E359DB /* ScreenDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismissable.swift; sourceTree = "<group>"; };
-		24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPokemonStorage.swift; sourceTree = "<group>"; };
 		84DEA9422ACD6E0D00472C1F /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 		84DEA9452AD00E0000472C1F /* PokemonDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PokemonDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -95,8 +99,8 @@
 				24C80A942010AD0A00E359DB /* Resources */,
 				24C80A912010ACD000E359DB /* Model */,
 				24C80A922010ACD800E359DB /* View */,
-				24C80A932010ACE200E359DB /* Controller */,
 				24C80A7F2010A83000E359DB /* AppDelegate.swift */,
+				242900CD2F0EE0710044CB26 /* PokeSpinApp.swift */,
 				24C80A832010A83000E359DB /* Main.storyboard */,
 				24C80A862010A83000E359DB /* Assets.xcassets */,
 				24C80A882010A83000E359DB /* LaunchScreen.storyboard */,
@@ -108,6 +112,7 @@
 		24C80A912010ACD000E359DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				242900CB2F0EE0570044CB26 /* GameStats.swift */,
 				24C80AA22010AEB600E359DB /* Environment */,
 				24C80AA12010AEA400E359DB /* Database */,
 				24C80A9F2010AE0C00E359DB /* Network */,
@@ -118,21 +123,14 @@
 		24C80A922010ACD800E359DB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				24C80AB62010C7E700E359DB /* PokemonCollectionViewCell.swift */,
+				242900CF2F0EE08C0044CB26 /* ContentView.swift */,
+				242900D02F0EE08C0044CB26 /* IntroView.swift */,
+				242900D12F0EE08C0044CB26 /* PokemonCellView.swift */,
+				242900D22F0EE08C0044CB26 /* PokemonCollectionView.swift */,
+				242900D32F0EE08C0044CB26 /* SlotMachineView.swift */,
+				242900D42F0EE08C0044CB26 /* SuccessView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		24C80A932010ACE200E359DB /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				24C80A952010AD2800E359DB /* BaseViewController.swift */,
-				24C80A972010AD3400E359DB /* IntroViewController.swift */,
-				24C80A992010AD8B00E359DB /* PokemonCollectionViewController.swift */,
-				24C80A9B2010AD9800E359DB /* SlotMachineViewController.swift */,
-				24C80A9D2010ADA100E359DB /* SuccessViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		24C80A942010AD0A00E359DB /* Resources */ = {
@@ -272,23 +270,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24C80A9A2010AD8B00E359DB /* PokemonCollectionViewController.swift in Sources */,
 				84DEA9432ACD6E0D00472C1F /* PokemonManager.swift in Sources */,
 				24C80AB32010BCFB00E359DB /* Constants.swift in Sources */,
 				24C80AA62010AEF900E359DB /* Environment.swift in Sources */,
-				24C80A982010AD3400E359DB /* IntroViewController.swift in Sources */,
 				84DEA9482AD010B000472C1F /* Pokemon.swift in Sources */,
 				24C80AB12010BAF700E359DB /* AppColors.swift in Sources */,
+				242900D52F0EE08C0044CB26 /* ContentView.swift in Sources */,
+				242900D62F0EE08C0044CB26 /* IntroView.swift in Sources */,
+				242900D72F0EE08C0044CB26 /* PokemonCollectionView.swift in Sources */,
+				242900D82F0EE08C0044CB26 /* SuccessView.swift in Sources */,
+				242900D92F0EE08C0044CB26 /* PokemonCellView.swift in Sources */,
+				242900DA2F0EE08C0044CB26 /* SlotMachineView.swift in Sources */,
 				84DEA94A2AD014AD00472C1F /* CoreDataStack.swift in Sources */,
 				24C80A802010A83000E359DB /* AppDelegate.swift in Sources */,
+				242900CC2F0EE0570044CB26 /* GameStats.swift in Sources */,
 				24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */,
-				24C80A962010AD2800E359DB /* BaseViewController.swift in Sources */,
 				24C80AA42010AEC000E359DB /* NetworkClient.swift in Sources */,
-				24C80A9E2010ADA100E359DB /* SuccessViewController.swift in Sources */,
-				24C80AB72010C7E700E359DB /* PokemonCollectionViewCell.swift in Sources */,
 				2C374B2A2ADFD95E00F0572F /* IPokemonStorage.swift in Sources */,
-				24C80A9C2010AD9800E359DB /* SlotMachineViewController.swift in Sources */,
 				244131FA2C3F0A17000C7BE4 /* UIViewExtensions.swift in Sources */,
+				242900CE2F0EE0710044CB26 /* PokeSpinApp.swift in Sources */,
 				84DEA9462AD00E0000472C1F /* PokemonDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,12 +427,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6F69A38VNJ;
 				INFOPLIST_FILE = PokeSpin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.ivna.PokeSpin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -445,12 +445,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6F69A38VNJ;
 				INFOPLIST_FILE = PokeSpin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.ivna.PokeSpin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
