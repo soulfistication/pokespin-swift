@@ -12,7 +12,7 @@ struct SuccessView: View {
     let pokemonNumber: Int
     let onDismiss: () -> Void
     
-    @Environment(\.dismiss) private var dismiss
+    // @Environment(\.dismiss) private var dismiss
     @State private var pokemon: Pokemon? = nil
     @State private var isLoading = true
     @State private var scale: CGFloat = 0.1
@@ -41,7 +41,7 @@ struct SuccessView: View {
                             .animation(.spring(response: 0.6, dampingFraction: 0.6), value: scale)
                         
                         // Pokemon name
-                        Text(pokemon.name.capitalized)
+                        Text(pokemon.name!.capitalized)
                             .font(.system(size: 28, weight: .bold))
                             .scaleEffect(scale == 1.0 ? 1.2 : 1.0)
                             .animation(.easeInOut(duration: 0.5).delay(0.3), value: scale)
@@ -68,7 +68,7 @@ struct SuccessView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Close") {
-                        dismiss()
+                        //dismiss()
                         onDismiss()
                     }
                 }

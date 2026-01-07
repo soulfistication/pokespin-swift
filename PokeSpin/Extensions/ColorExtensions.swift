@@ -2,8 +2,8 @@
 //  ColorExtensions.swift
 //  PokeSpin
 //
-//  Created by Auto on 2024.
-//  Copyright © 2024 Auto. All rights reserved.
+//  Created by Ivan Almada on 2024.
+//  Copyright © 2024 Ivan Almada. All rights reserved.
 //
 
 import SwiftUI
@@ -11,4 +11,3 @@ import SwiftUI
 extension Color {
     static let creamyBlue = Color(red: 222.0/255.0, green: 241.0/255.0, blue: 252.0/255.0)
 }
-

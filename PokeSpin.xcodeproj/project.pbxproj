@@ -15,6 +15,7 @@
 		242900D82F0EE08C0044CB26 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D42F0EE08C0044CB26 /* SuccessView.swift */; };
 		242900D92F0EE08C0044CB26 /* PokemonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D12F0EE08C0044CB26 /* PokemonCellView.swift */; };
 		242900DA2F0EE08C0044CB26 /* SlotMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900D32F0EE08C0044CB26 /* SlotMachineView.swift */; };
+		242900DC2F0EEFC20044CB26 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242900DB2F0EEFC20044CB26 /* ColorExtensions.swift */; };
 		244131FA2C3F0A17000C7BE4 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */; };
 		24C80A802010A83000E359DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80A7F2010A83000E359DB /* AppDelegate.swift */; };
 		24C80A852010A83000E359DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24C80A832010A83000E359DB /* Main.storyboard */; };
@@ -24,7 +25,6 @@
 		24C80AA62010AEF900E359DB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AA52010AEF900E359DB /* Environment.swift */; };
 		24C80AAC2010B04900E359DB /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAA2010B04900E359DB /* Futura.ttc */; };
 		24C80AAD2010B04900E359DB /* Futura-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C80AAB2010B04900E359DB /* Futura-Light.ttf */; };
-		24C80AB12010BAF700E359DB /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB02010BAF700E359DB /* AppColors.swift */; };
 		24C80AB32010BCFB00E359DB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB22010BCFB00E359DB /* Constants.swift */; };
 		24C80AB52010C55E00E359DB /* ScreenDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C80AB42010C55E00E359DB /* ScreenDismissable.swift */; };
 		2C374B2A2ADFD95E00F0572F /* IPokemonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */; };
@@ -43,6 +43,7 @@
 		242900D22F0EE08C0044CB26 /* PokemonCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionView.swift; sourceTree = "<group>"; };
 		242900D32F0EE08C0044CB26 /* SlotMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotMachineView.swift; sourceTree = "<group>"; };
 		242900D42F0EE08C0044CB26 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		242900DB2F0EEFC20044CB26 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		24C80A7C2010A83000E359DB /* PokeSpin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeSpin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24C80A7F2010A83000E359DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		24C80AA52010AEF900E359DB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		24C80AAA2010B04900E359DB /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
 		24C80AAB2010B04900E359DB /* Futura-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Light.ttf"; sourceTree = "<group>"; };
-		24C80AB02010BAF700E359DB /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		24C80AB22010BCFB00E359DB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C80AB42010C55E00E359DB /* ScreenDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismissable.swift; sourceTree = "<group>"; };
 		2C374B292ADFD95E00F0572F /* IPokemonStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPokemonStorage.swift; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		24C80AAE2010BAC100E359DB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				24C80AB02010BAF700E359DB /* AppColors.swift */,
+				242900DB2F0EEFC20044CB26 /* ColorExtensions.swift */,
 				244131F92C3F0A17000C7BE4 /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
@@ -274,7 +274,6 @@
 				24C80AB32010BCFB00E359DB /* Constants.swift in Sources */,
 				24C80AA62010AEF900E359DB /* Environment.swift in Sources */,
 				84DEA9482AD010B000472C1F /* Pokemon.swift in Sources */,
-				24C80AB12010BAF700E359DB /* AppColors.swift in Sources */,
 				242900D52F0EE08C0044CB26 /* ContentView.swift in Sources */,
 				242900D62F0EE08C0044CB26 /* IntroView.swift in Sources */,
 				242900D72F0EE08C0044CB26 /* PokemonCollectionView.swift in Sources */,
@@ -290,6 +289,7 @@
 				244131FA2C3F0A17000C7BE4 /* UIViewExtensions.swift in Sources */,
 				242900CE2F0EE0710044CB26 /* PokeSpinApp.swift in Sources */,
 				84DEA9462AD00E0000472C1F /* PokemonDataModel.xcdatamodeld in Sources */,
+				242900DC2F0EEFC20044CB26 /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +430,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6F69A38VNJ;
 				INFOPLIST_FILE = PokeSpin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.ivna.PokeSpin;
@@ -448,7 +448,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6F69A38VNJ;
 				INFOPLIST_FILE = PokeSpin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.ivna.PokeSpin;
