@@ -7,75 +7,82 @@
 //
 
 import UIKit
+import SwiftData
 
 struct PokemonManager: IPokemonStorage {
 
-    static let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    static func getModelContext() -> ModelContext? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        return appDelegate.modelContext
+    }
 
     static func fetchPokemon(number: Int) -> Pokemon? {
-        guard let appDelegate else { return nil }
-        let managedContext = appDelegate.coreDataStack.managedContext
-        let pokemonFetchRequest = Pokemon.fetchRequest()
+        guard let modelContext = getModelContext() else { return nil }
+        
+        let descriptor = FetchDescriptor<Pokemon>(
+            predicate: #Predicate<Pokemon> { $0.id == Int64(number) }
+        )
+        
         do {
-            let fetchResults = try managedContext.fetch(pokemonFetchRequest)
-            return fetchResults.filter { $0.id == number }.first
-        } catch (let error) {
-            print(String(describing: error))
+            let results = try modelContext.fetch(descriptor)
+            return results.first
+        } catch {
+            print("Error fetching Pokemon: \(error)")
+            return nil
         }
-        return nil
     }
 
     static func add(pokemon: Pokemon) {
-        guard let appDelegate else { return }
-
+        guard let modelContext = getModelContext() else { return }
+        
         DispatchQueue.main.async {
-            let managedContext = appDelegate.coreDataStack.managedContext
+            modelContext.insert(pokemon)
             do {
-                try managedContext.save()
-            } catch (let error) {
-                print(String(describing: error))
+                try modelContext.save()
+            } catch {
+                print("Error saving Pokemon: \(error)")
             }
         }
     }
 
     static func fetchPokemons() -> [Pokemon] {
-        guard let appDelegate else { return [Pokemon]() }
-
-        let managedContext = appDelegate.coreDataStack.managedContext
-        let pokemonFetchRequest = Pokemon.fetchRequest()
+        guard let modelContext = getModelContext() else { return [Pokemon]() }
+        
+        let descriptor = FetchDescriptor<Pokemon>()
+        
         do {
-            let fetchResults = try managedContext.fetch(pokemonFetchRequest)
-            return fetchResults
-        } catch (let error) {
-            print(String(describing: error))
+            return try modelContext.fetch(descriptor)
+        } catch {
+            print("Error fetching Pokemons: \(error)")
+            return [Pokemon]()
         }
-        return [Pokemon]()
     }
 
     static func deletePokemon(number: Int) {
-        guard let appDelegate else { return }
+        guard let modelContext = getModelContext() else { return }
         guard let pokemon = self.fetchPokemon(number: number) else { return }
-
-        let managedContext = appDelegate.coreDataStack.managedContext
-        managedContext.delete(pokemon)
-
+        
+        modelContext.delete(pokemon)
+        
         do {
-            try managedContext.save()
-        } catch (let error) {
-            print(String(describing: error))
+            try modelContext.save()
+        } catch {
+            print("Error deleting Pokemon: \(error)")
         }
     }
 
     static func deletePokemons() {
-        guard let appDelegate else { return }
+        guard let modelContext = getModelContext() else { return }
         
-        let managedContext = appDelegate.coreDataStack.managedContext
-        PokemonManager.fetchPokemons().forEach { managedContext.delete($0) }
-
+        let pokemons = PokemonManager.fetchPokemons()
+        pokemons.forEach { modelContext.delete($0) }
+        
         do {
-            try managedContext.save()
-        } catch (let error as NSError) {
-            print(String(describing: error))
+            try modelContext.save()
+        } catch {
+            print("Error deleting Pokemons: \(error)")
         }
     }
 

@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import SwiftData
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    lazy var coreDataStack = CoreDataStack(modelName: "PokemonDataModel")
+    lazy var modelContainer: ModelContainer = {
+        DataStack.createModelContainer()
+    }()
+    
+    var modelContext: ModelContext {
+        modelContainer.mainContext
+    }
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
@@ -22,7 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        coreDataStack.saveContext()
+        // Swift Data automatically saves changes, but we can force a save if needed
+        do {
+            try modelContext.save()
+        } catch {
+            print("Error saving context: \(error)")
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

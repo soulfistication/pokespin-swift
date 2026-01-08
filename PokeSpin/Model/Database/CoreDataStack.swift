@@ -5,36 +5,25 @@
 //  Created by Ivan Almada on 10/6/23.
 //  Copyright © 2023 Ivan. All rights reserved.
 //
+//  Note: This file is kept for backward compatibility but is no longer used.
+//  Swift Data handles persistence automatically.
 
-import CoreData
+import Foundation
+import SwiftData
 
-class CoreDataStack {
-
-    private let modelName: String
+class DataStack {
+    static let shared = DataStack()
     
-    init(modelName: String) {
-        self.modelName = modelName
-    }
-
-    private lazy var storeContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: self.modelName)
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
-
-    lazy var managedContext: NSManagedObjectContext = self.storeContainer.viewContext
-
-    func saveContext() {
-        guard managedContext.hasChanges else { return }
+    private init() {}
+    
+    static func createModelContainer() -> ModelContainer {
+        let schema = Schema([Pokemon.self])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        
         do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Unresolved error \(error), \(error.userInfo)")
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
         }
     }
-
 }

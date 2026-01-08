@@ -6,26 +6,36 @@
 //  Copyright © 2023 Ivan. All rights reserved.
 //
 
-import CoreData
+import Foundation
+import SwiftData
 
-class Pokemon: NSManagedObject, Decodable {
-
-    required convenience init(from decoder: Decoder) throws {
-
-        guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
-            throw DecoderConfigurationError.missingManagedObjectContext
-        }
-
-        self.init(context: context)
-
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int64.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.weight = try container.decode(Int16.self, forKey: .weight)
-        self.height = try container.decode(Int16.self, forKey: .height)
-        self.baseExperience = try container.decode(Int16.self, forKey: .baseExperience)
+@Model
+final class Pokemon {
+    var id: Int64
+    var name: String
+    var weight: Int16
+    var height: Int16
+    var baseExperience: Int16
+    var isUnlocked: Bool
+    
+    init(id: Int64, name: String, weight: Int16, height: Int16, baseExperience: Int16, isUnlocked: Bool = false) {
+        self.id = id
+        self.name = name
+        self.weight = weight
+        self.height = height
+        self.baseExperience = baseExperience
+        self.isUnlocked = isUnlocked
     }
+}
 
+// Helper struct for decoding JSON, then convert to Pokemon model
+struct PokemonDTO: Decodable {
+    let id: Int64
+    let name: String
+    let weight: Int16
+    let height: Int16
+    let baseExperience: Int16
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
@@ -33,13 +43,8 @@ class Pokemon: NSManagedObject, Decodable {
         case height = "height"
         case baseExperience = "base_experience"
     }
-
-}
-
-extension CodingUserInfoKey {
-    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
-}
-
-enum DecoderConfigurationError: Error {
-    case missingManagedObjectContext
+    
+    func toPokemon() -> Pokemon {
+        Pokemon(id: id, name: name, weight: weight, height: height, baseExperience: baseExperience, isUnlocked: false)
+    }
 }

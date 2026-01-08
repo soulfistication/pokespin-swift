@@ -91,16 +91,11 @@ struct SuccessView: View {
         }
         
         // Fetch from API
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            isLoading = false
-            return
-        }
-        
         do {
             let pokemonData = try await client.requestJSON(pokemon: pokemonNumber)
             let decoder = JSONDecoder()
-            decoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.coreDataStack.managedContext
-            let pokemon = try decoder.decode(Pokemon.self, from: pokemonData)
+            let pokemonDTO = try decoder.decode(PokemonDTO.self, from: pokemonData)
+            let pokemon = pokemonDTO.toPokemon()
             pokemon.isUnlocked = true
             self.pokemon = pokemon
             PokemonManager.add(pokemon: pokemon)

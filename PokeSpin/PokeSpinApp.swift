@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PokeSpinApp: App {
@@ -15,7 +16,7 @@ struct PokeSpinApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, appDelegate.coreDataStack.managedContext)
+                .modelContainer(appDelegate.modelContainer)
         }
     }
 }
